@@ -13,7 +13,9 @@ bus = can.Bus(interface='kvaser',
               receive_own_messages=True)
 
 # send a message
-message = can.Message(arbitration_id=0x708, is_extended_id=True, data=[0x20, 0x01])
+# message = can.Message(arbitration_id=0x708, is_extended_id=True, data=[0x20, 0x01])
+# bus.send(message, timeout=0.2)
+message = can.Message(arbitration_id=0x708, is_extended_id=True, data=[0x30, 0x01])
 bus.send(message, timeout=0.2)
 # sleep(1)
 message = can.Message(arbitration_id=0x708, is_extended_id=True, data=[0x30, 0x01])
@@ -35,19 +37,8 @@ bus.send(message, timeout=0.2)
 message = can.Message(arbitration_id=0x58a, is_extended_id=True, data=[0x00, 0x00, 0x80, 0x0A])
 bus.send(message, timeout=0.2)
 
-
 # Response messages:
 # Power management:
 # 070b - bc 76 40 a2 d8 01 00 02
 # Power status:
 # 070c - 00 00 01
-
-
-
-
-# iterate over received messages
-for msg in bus:
-    # print(f"{msg.arbitration_id:X}: {codecs.decode(msg.data, 'hex_codec')}")
-    print(msg.data)
-# or use an asynchronous notifier
-notifier = can.Notifier(bus, [can.Logger("recorded.log"), can.Printer()])
