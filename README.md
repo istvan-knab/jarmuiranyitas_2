@@ -1,8 +1,12 @@
 # Járműirányítás 2.
 
+<img align="right" width="325" height="75" src="https://github.com/istvan-knab/jarmuiranyitas_2/blob/Develop/Pictures/sztaki_logo_kek.png">
+
 * Pelenczei Bálint
 * Knáb István Gellért
 * Máté Kristóf
+
+
 
 ![alt text](https://github.com/istvan-knab/jarmuiranyitas_2/blob/Develop/Pictures/_DSC6410.JPG)
 ## Quick description 📋
@@ -17,6 +21,5 @@ The vehicle is a 1:5 scale car mounted with BLDC motors on every Wheel. The Can 
 
 ## Task ✒️
 
-Torque vectoring
-
+The first task is to realize steering without giving any commands to the servo, only using torque vectoring.
 
