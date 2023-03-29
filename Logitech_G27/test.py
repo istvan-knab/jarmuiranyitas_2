@@ -28,10 +28,10 @@ class joystick_handler(object):
         self.joy = pygame.joystick.Joystick(id)
         self.name = self.joy.get_name()
         self.joy.init()
-        self.numaxes    = self.joy.get_numaxes()
-        self.numballs   = self.joy.get_numballs()
+        self.numaxes = self.joy.get_numaxes()
+        self.numballs = self.joy.get_numballs()
         self.numbuttons = self.joy.get_numbuttons()
-        self.numhats    = self.joy.get_numhats()
+        self.numhats = self.joy.get_numhats()
 
         self.axis = []
         for i in range(self.numaxes):
@@ -53,9 +53,9 @@ class joystick_handler(object):
 class input_test(object):
     class program:
         "Program metadata"
-        name    = "Pygame Joystick Test"
+        name = "Pygame Joystick Test"
         version = "0.2"
-        author  = "Denilson Figueiredo de Sá Maia"
+        author = "Denilson Figueiredo de Sá Maia"
         nameversion = name + " " + version
 
     class default:
@@ -76,9 +76,9 @@ class input_test(object):
         # TODO: Add a command-line parameter to change the size.
         # TODO: Maybe make this program flexible, let the window height define
         #       the actual font/circle size.
-        fontsize     = 20
+        fontsize = 20
         circleheight = 10
-        resolution   = (640, 480)
+        resolution = (640, 480)
 
     def load_the_fucking_font(self):
         # The only reason for this function is that pygame can find a font
@@ -104,7 +104,7 @@ class input_test(object):
         size = self.default.circleheight
         self.circle = pygame.surface.Surface((size,size))
         self.circle.fill(Color("magenta"))
-        basecolor  = ( 63,  63,  63, 255)  # RGBA
+        basecolor = ( 63,  63,  63, 255)  # RGBA
         lightcolor = (255, 255, 255, 255)
         for i in range(size // 2, -1, -1):
             color = (
@@ -205,10 +205,10 @@ class input_test(object):
         )
 
     def draw_slider(self, value, pos):
-        width  = pos[2]
+        width = pos[2]
         height = self.default.circleheight
-        left   = pos[0]
-        top    = pos[1] + (pos[3] - height) // 2
+        left = pos[0]
+        top = pos[1] + (pos[3] - height) // 2
         self.screen.fill(
             (127, 127, 127, 255),
             (left + height // 2, top + height // 2 - 2, width - height, 2)

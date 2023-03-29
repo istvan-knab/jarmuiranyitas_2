@@ -1,17 +1,28 @@
 import socket
 from time import sleep
+import json
+from pprint import pprint
 
-# UDP_IP = "::1"  # localhost
-UDP_IP = "fc94:2469:4cf7:f700:9fee:80cd:b870:95bf"  # Titan
+connect_to = "Titan"
+
 UDP_PORT = 5005
-MESSAGE = "Hello, World1!"
+UDP_IP = socket.getaddrinfo(connect_to, UDP_PORT, family=socket.AF_INET6, proto=socket.IPPROTO_UDP)[0][4][0]
+# UDP_IP = "::1"  # localhost
 
-print("UDP target IP:", UDP_IP)
-print("UDP target port:", UDP_PORT)
-print("message:", MESSAGE)
+sample_dict = {
+    "wheel": 31,        # [-1;1]
+    "throttle": 0,      # [0;1]
+    "brake": 0          # [0;1]
+}
 
 sock = socket.socket(socket.AF_INET6, socket.SOCK_DGRAM)
 
-for i in range(100):
-    sock.sendto(("MESSAGE_" + str(i)).encode(), (UDP_IP, UDP_PORT))
-    sleep(0.5)
+for i in range(500):
+    sample_dict["wheel"] = i
+    sample_dict["brake"] = 500 - 10.111 * i
+
+    encode_data = json.dumps(sample_dict).encode('utf-8')
+
+    sock.sendto(encode_data, (UDP_IP, UDP_PORT))
+    pprint(sample_dict)
+    sleep(1)
