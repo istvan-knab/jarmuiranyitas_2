@@ -39,7 +39,7 @@ class Can:
         self.bus.send(message, timeout=0.2)
         sleep(1)
 
-        message = can.Message(arbitration_id=0x58D, is_extended_id=False,data=[0x02, 0x00, 0x00, 0x00, 0x44, 0x7A, 0x00, 0x00])
+        message = can.Message(arbitration_id=0x58D, is_extended_id=False, data=[0x02, 0x00, 0x00, 0x00, 0x44, 0x7A, 0x00, 0x00])
         self.bus.send(message, timeout=0.2)
         sleep(1)
 
