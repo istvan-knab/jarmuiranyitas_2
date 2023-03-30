@@ -35,6 +35,10 @@ class CANNetwork:
 
         return flags
 
+    def discover_units(self):
+        # TODO: function implementation+
+        pass
+
     @staticmethod
     def generate_arbitration_id(class_id: hex, device_id: hex, message_type_id: hex):
         arbitration_id_bin = f'{class_id}{device_id:0>4b}{message_type_id:0>3b}'

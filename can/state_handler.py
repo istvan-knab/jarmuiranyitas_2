@@ -8,6 +8,8 @@ from jarmuiranyitas_2.can.ids.can_device_ids import CanDeviceIDs
 from jarmuiranyitas_2.can.ids.can_message_type_ids import CanMessageTypeIDs
 
 from jarmuiranyitas_2.can.ids.can_power_management_message_ids import CanPowerManagementMessageIDs
+from jarmuiranyitas_2.can.ids.can_servo_message_ids import CanServoMessageIDs
+from jarmuiranyitas_2.can.ids.can_wheel_drive_message_ids import CanWheelDriveMessageIDs
 
 
 class StateHandler:
@@ -16,12 +18,21 @@ class StateHandler:
         self.prev_state = init_state
         self.current_state = copy.deepcopy(self.prev_state)
 
+        self.flags = {"idl": False, "drv": False, "ref": False}
+        self.update_flags()
+
+        self.reference = {"current": None, "velocity": None, "steering_angle": None}
+
         self.network = can_network
 
     def check(self):
         if self.prev_state != self.current_state:
             print("State: {}".format(self.current_state))
             self.prev_state = copy.deepcopy(self.current_state)
+
+    def update_flags(self):
+        flags_from_network = self.network.get_flags()
+        self.flags.update(flags_from_network)
 
     def get_current_state(self):
         self.check()
@@ -41,10 +52,9 @@ class StateHandler:
         self.network.send_message(arbitration_id=cmd_pm_id, extended_id=False, data=cmd_hvdc_on_data)
         self.network.sleep(duration_ms=1500)
 
-        flag_lv = None
-        flag_hv = None
+        self.update_flags()
 
-        if flag_lv and flag_hv:
+        if self.flags["lv"] and self.flags["hv"]:
             self.current_state = InternalStates.START2
         else:
             self.current_state = InternalStates.ERR
@@ -53,16 +63,64 @@ class StateHandler:
         return self.current_state
 
     def handle_start2(self):
+        self.network.discover_units()
+        self.update_flags()
+
+        if self.flags["dss"] and self.flags["dw1"] and self.flags["dw2"] and self.flags["dw3"] and self.flags["dw4"]:
+            self.current_state = InternalStates.START3
+
+        else:
+            self.current_state = InternalStates.ERR
+            print("Discovery of unit(s) failed")
+
         return self.current_state
 
     def handle_start3(self):
+        cmd_servo_id = self.network.generate_arbitration_id(class_id=CanClassIDs.CAN_CLASS_SERVO,
+                                                            device_id=CanDeviceIDs.CAN_DEVICE_SERVO,
+                                                            message_type_id=CanMessageTypeIDs.CAN_MESSAGE_TYPE_COMMAND)
+        cmd_servo_mode_start_data = [CanServoMessageIDs.MODE, CanServoMessageIDs.MODE_START]
+        self.network.send_message(arbitration_id=cmd_servo_id, extended_id=False, data=cmd_servo_mode_start_data)
+        self.network.sleep(duration_ms=100)
+
+        cfg_wd_fr_id = self.network.generate_arbitration_id(class_id=CanClassIDs.CAN_CLASS_WHEEL_DRIVE,
+                                                            device_id=CanDeviceIDs.CAN_DEVICE_WHEEL_DRIVE_FR,
+                                                            message_type_id=CanMessageTypeIDs.CAN_MESSAGE_TYPE_CONFIG)
+        cfg_wd_fl_id = self.network.generate_arbitration_id(class_id=CanClassIDs.CAN_CLASS_WHEEL_DRIVE,
+                                                            device_id=CanDeviceIDs.CAN_DEVICE_WHEEL_DRIVE_FL,
+                                                            message_type_id=CanMessageTypeIDs.CAN_MESSAGE_TYPE_CONFIG)
+        cfg_wd_rl_id = self.network.generate_arbitration_id(class_id=CanClassIDs.CAN_CLASS_WHEEL_DRIVE,
+                                                            device_id=CanDeviceIDs.CAN_DEVICE_WHEEL_DRIVE_RL,
+                                                            message_type_id=CanMessageTypeIDs.CAN_MESSAGE_TYPE_CONFIG)
+        cfg_wd_rr_id = self.network.generate_arbitration_id(class_id=CanClassIDs.CAN_CLASS_WHEEL_DRIVE,
+                                                            device_id=CanDeviceIDs.CAN_DEVICE_WHEEL_DRIVE_RR,
+                                                            message_type_id=CanMessageTypeIDs.CAN_MESSAGE_TYPE_CONFIG)
+        cfg_wd_control_velocity_data = [CanWheelDriveMessageIDs.CONTROL_MODE, 0, 0, 0,
+                                        CanWheelDriveMessageIDs.VELOCITY, 0, 0, 0]
+        self.network.send_message(arbitration_id=cfg_wd_fr_id, extended_id=False, data=cfg_wd_control_velocity_data)
+        self.network.send_message(arbitration_id=cfg_wd_fl_id, extended_id=False, data=cfg_wd_control_velocity_data)
+        self.network.send_message(arbitration_id=cfg_wd_rr_id, extended_id=False, data=cfg_wd_control_velocity_data)
+        self.network.send_message(arbitration_id=cfg_wd_rl_id, extended_id=False, data=cfg_wd_control_velocity_data)
+
+        self.current_state = InternalStates.IDLE
+        self.flags["idl"] = True
+
         return self.current_state
 
     def handle_idle(self):
+        if self.flags["idl"]:
+            # TODO: wheel_drive_fr/fl/rr/rl --> mode_drive, state_stopped messages
+            # TODO: set references to 0
+            self.flags["ref"] = False
+
+        self.flags["idl"] = False
+
         return self.current_state
 
     def handle_drive(self):
+        # TODO:
         return self.current_state
 
     def handle_err(self):
+        # TODO:
         return self.current_state

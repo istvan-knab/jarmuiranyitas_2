@@ -15,8 +15,6 @@ def main():
     current_state = state_handler.get_current_state()
 
     while True:
-        flags = network.get_flags()
-
         if current_state == InternalStates.START1:
             current_state = state_handler.handle_start1()
 
