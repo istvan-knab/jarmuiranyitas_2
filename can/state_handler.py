@@ -41,7 +41,8 @@ class StateHandler:
         self.network.send_message(arbitration_id=cmd_pm_id, extended_id=False, data=cmd_hvdc_on_data)
         self.network.sleep(duration_ms=1500)
 
-        flag_lv
+        flag_lv = None
+        flag_hv = None
 
         if flag_lv and flag_hv:
             self.current_state = InternalStates.START2

@@ -1,9 +1,9 @@
 import can
 from time import sleep
 
-from jarmuiranyitas_2.can.wheel_drive_listener import WheelDriveListener
-from jarmuiranyitas_2.can.servo_listener import ServoListener
-from jarmuiranyitas_2.can.power_management_listener import PowerManagementListener
+from jarmuiranyitas_2.can.listeners.wheel_drive_listener import WheelDriveListener
+from jarmuiranyitas_2.can.listeners.servo_listener import ServoListener
+from jarmuiranyitas_2.can.listeners.power_management_listener import PowerManagementListener
 
 
 class CANNetwork:
@@ -24,17 +24,16 @@ class CANNetwork:
         self.bus.send(message, timeout=timeout)
 
     def get_flags(self):
-        flags = {"lv": self.get_flag_lv(),
-                 "hv": self.get_flag_hv(),
+        flags = {"lv": self.power_management_listener.get_flag_lv(),
+                 "hv": self.power_management_listener.get_flag_hv(),
+                 "dss": self.servo_listener.get_flag_dss(),
+                 "dw1": self.wheel_drive_listener.get_flag_dw1(),
+                 "dw2": self.wheel_drive_listener.get_flag_dw2(),
+                 "dw3": self.wheel_drive_listener.get_flag_dw3(),
+                 "dw4": self.wheel_drive_listener.get_flag_dw4(),
                  }
 
         return flags
-
-    def get_flag_lv(self):
-        return self.power_management_listener.get_flag_lv()
-
-    def get_flag_hv(self):
-        return self.power_management_listener.get_flag_hv()
 
     @staticmethod
     def generate_arbitration_id(class_id: hex, device_id: hex, message_type_id: hex):

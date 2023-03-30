@@ -1,12 +1,13 @@
-import can
 from can import Message
 
+from jarmuiranyitas_2.can.listeners.listener import Listener
 from jarmuiranyitas_2.can.ids.can_class_ids import CanClassIDs
 from jarmuiranyitas_2.can.ids.can_device_ids import CanDeviceIDs
 from jarmuiranyitas_2.can.ids.can_message_type_ids import CanMessageTypeIDs
+from jarmuiranyitas_2.can.ids.can_power_management_message_ids import CanPowerManagementMessageIDs
 
 
-class PowerManagementListener(can.Listener):
+class PowerManagementListener(Listener):
     def __init__(self):
         super(PowerManagementListener, self).__init__()
 
@@ -26,12 +27,13 @@ class PowerManagementListener(can.Listener):
     def on_message_received(self, msg: Message) -> None:
         if msg.arbitration_id == self.power_management_measurement_id:
             pass
+
         elif msg.arbitration_id == self.power_management_status_id:
-            if msg.data[1] < 2:
+            if msg.data[1] < CanPowerManagementMessageIDs.BATT_CRITICAL:
                 self.flag_LV = True
             else:
                 self.flag_LV = False
-            if msg.data[2] < 2:
+            if msg.data[2] < CanPowerManagementMessageIDs.BATT_CRITICAL:
                 self.flag_HV = True
             else:
                 self.flag_HV = False
