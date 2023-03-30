@@ -109,7 +109,24 @@ class StateHandler:
 
     def handle_idle(self):
         if self.flags["idl"]:
-            # TODO: wheel_drive_fr/fl/rr/rl --> mode_drive, state_stopped messages
+
+            cmd_fr_drive_state = self.network.send_message(class_id=CanClassIDs.CAN_CLASS_WHEEL_DRIVE,
+                                                           device_id=CanDeviceIDs.CAN_DEVICE_WHEEL_DRIVE_FR,
+                                                           message_type_id=CanMessageTypeIDs.CAN_MESSAGE_TYPE_COMMAND)
+            cmd_fl_drive_state = self.network.send_message(class_id=CanClassIDs.CAN_CLASS_WHEEL_DRIVE,
+                                                           device_id=CanDeviceIDs.CAN_DEVICE_WHEEL_DRIVE_FL,
+                                                           message_type_id=CanMessageTypeIDs.CAN_MESSAGE_TYPE_COMMAND)
+            cmd_rr_drive_state = self.network.send_message(class_id=CanClassIDs.CAN_CLASS_WHEEL_DRIVE,
+                                                           device_id=CanDeviceIDs.CAN_DEVICE_WHEEL_DRIVE_RR,
+                                                           message_type_id=CanMessageTypeIDs.CAN_MESSAGE_TYPE_COMMAND)
+            cmd_rl_drive_state = self.network.send_message(class_id=CanClassIDs.CAN_CLASS_WHEEL_DRIVE,
+                                                           device_id=CanDeviceIDs.CAN_DEVICE_WHEEL_DRIVE_RL,
+                                                           message_type_id=CanMessageTypeIDs.CAN_MESSAGE_TYPE_COMMAND)
+            cfg_message = [CanWheelDriveMessageIDs.DRIVE_STATE, 0, CanWheelDriveMessageIDs.STOPPED, 0]
+            self.network.send_message(arbitration_id=cmd_fr_drive_state, extended_id=False,data=cfg_message)
+            self.network.send_message(arbitration_id=cmd_fl_drive_state, extended_id=False, data=cfg_message)
+            self.network.send_message(arbitration_id=cmd_rr_drive_state, extended_id=False, data=cfg_message)
+            self.network.send_message(arbitration_id=cmd_rl_drive_state, extended_id=False, data=cfg_message)
             # TODO: set references to 0
             self.flags["ref"] = False
 
