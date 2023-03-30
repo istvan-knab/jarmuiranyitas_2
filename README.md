@@ -1,6 +1,6 @@
 # Járműirányítás 2.
 
-<img align="right" width="325" height="75" src="https://github.com/istvan-knab/jarmuiranyitas_2/blob/Develop/Pictures/sztaki_logo_kek.png">
+<img align="right" width="325" height="75" src="https://github.com/istvan-knab/jarmuiranyitas_2/blob/develop_can_network/Old%20Documentation/Pictures/sztaki_logo_kek.png">
 
 * Pelenczei Bálint
 * Knáb István Gellért
