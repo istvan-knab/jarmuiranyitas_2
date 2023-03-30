@@ -127,7 +127,10 @@ class StateHandler:
             self.network.send_message(arbitration_id=cmd_fl_drive_state, extended_id=False, data=cfg_message)
             self.network.send_message(arbitration_id=cmd_rr_drive_state, extended_id=False, data=cfg_message)
             self.network.send_message(arbitration_id=cmd_rl_drive_state, extended_id=False, data=cfg_message)
-            # TODO: set references to 0
+
+            self.reference["velocity"] = 0
+            self.reference["current"] = 0
+            self.reference["steering_angle"] = 0
             self.flags["ref"] = False
 
         self.flags["idl"] = False
