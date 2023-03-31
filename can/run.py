@@ -15,22 +15,22 @@ def main():
     current_state = state_handler.get_current_state()
 
     while True:
-        if current_state == InternalStates.START1:
+        if current_state == InternalStates.START1.value:
             current_state = state_handler.handle_start1()
 
-        elif current_state == InternalStates.START2:
+        elif current_state == InternalStates.START2.value:
             current_state = state_handler.handle_start2()
 
-        elif current_state == InternalStates.START3:
+        elif current_state == InternalStates.START3.value:
             current_state = state_handler.handle_start3()
 
-        elif current_state == InternalStates.IDLE:
+        elif current_state == InternalStates.IDLE.value:
             current_state = state_handler.handle_idle()
 
-        elif current_state == InternalStates.DRIVE:
+        elif current_state == InternalStates.DRIVE.value:
             current_state = state_handler.handle_drive()
 
-        elif current_state == InternalStates.ERR:
+        elif current_state == InternalStates.ERR.value:
             current_state = state_handler.handle_err()
 
 

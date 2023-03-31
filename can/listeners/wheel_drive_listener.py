@@ -22,44 +22,44 @@ class WheelDriveListener(Listener):
         self.measurement_RL = self.MEASUREMENT_WHEEL_DRIVE
         self.measurement_RR = self.MEASUREMENT_WHEEL_DRIVE
 
-        wheel_drive_fr_response_id_bin = f'{CanClassIDs.CAN_CLASS_WHEEL_DRIVE:0>4b}' \
-                                         f'{CanDeviceIDs.CAN_DEVICE_WHEEL_DRIVE_FR:0>4b}' \
-                                         f'{CanMessageTypeIDs.CAN_MESSAGE_TYPE_RESPONSE:0>3b}'
+        wheel_drive_fr_response_id_bin = f'{CanClassIDs.CAN_CLASS_WHEEL_DRIVE.value:0>4b}' \
+                                         f'{CanDeviceIDs.CAN_DEVICE_WHEEL_DRIVE_FR.value:0>4b}' \
+                                         f'{CanMessageTypeIDs.RESPONSE.value:0>3b}'
         self.wheel_drive_FR_response_id = int(wheel_drive_fr_response_id_bin, 2)
 
-        wheel_drive_fl_response_id_bin = f'{CanClassIDs.CAN_CLASS_WHEEL_DRIVE:0>4b}' \
-                                         f'{CanDeviceIDs.CAN_DEVICE_WHEEL_DRIVE_FL:0>4b}' \
-                                         f'{CanMessageTypeIDs.CAN_MESSAGE_TYPE_RESPONSE:0>3b}'
+        wheel_drive_fl_response_id_bin = f'{CanClassIDs.CAN_CLASS_WHEEL_DRIVE.value:0>4b}' \
+                                         f'{CanDeviceIDs.CAN_DEVICE_WHEEL_DRIVE_FL.value:0>4b}' \
+                                         f'{CanMessageTypeIDs.RESPONSE.value:0>3b}'
         self.wheel_drive_FL_response_id = int(wheel_drive_fl_response_id_bin, 2)
 
-        wheel_drive_rr_response_id_bin = f'{CanClassIDs.CAN_CLASS_WHEEL_DRIVE:0>4b}' \
-                                         f'{CanDeviceIDs.CAN_DEVICE_WHEEL_DRIVE_RR:0>4b}' \
-                                         f'{CanMessageTypeIDs.CAN_MESSAGE_TYPE_RESPONSE:0>3b}'
+        wheel_drive_rr_response_id_bin = f'{CanClassIDs.CAN_CLASS_WHEEL_DRIVE.value:0>4b}' \
+                                         f'{CanDeviceIDs.CAN_DEVICE_WHEEL_DRIVE_RR.value:0>4b}' \
+                                         f'{CanMessageTypeIDs.RESPONSE.value:0>3b}'
         self.wheel_drive_RR_response_id = int(wheel_drive_rr_response_id_bin, 2)
 
-        wheel_drive_rl_response_id_bin = f'{CanClassIDs.CAN_CLASS_WHEEL_DRIVE:0>4b}' \
-                                         f'{CanDeviceIDs.CAN_DEVICE_WHEEL_DRIVE_RL:0>4b}' \
-                                         f'{CanMessageTypeIDs.CAN_MESSAGE_TYPE_RESPONSE:0>3b}'
+        wheel_drive_rl_response_id_bin = f'{CanClassIDs.CAN_CLASS_WHEEL_DRIVE.value:0>4b}' \
+                                         f'{CanDeviceIDs.CAN_DEVICE_WHEEL_DRIVE_RL.value:0>4b}' \
+                                         f'{CanMessageTypeIDs.RESPONSE.value:0>3b}'
         self.wheel_drive_RL_response_id = int(wheel_drive_rl_response_id_bin, 2)
 
-        wheel_drive_fr_measurement_id_bin = f'{CanClassIDs.CAN_CLASS_WHEEL_DRIVE:0>4b}' \
-                                            f'{CanDeviceIDs.CAN_DEVICE_WHEEL_DRIVE_FR:0>4b}' \
-                                            f'{CanMessageTypeIDs.CAN_MESSAGE_TYPE_MEASUREMENT:0>3b}'
+        wheel_drive_fr_measurement_id_bin = f'{CanClassIDs.CAN_CLASS_WHEEL_DRIVE.value:0>4b}' \
+                                            f'{CanDeviceIDs.CAN_DEVICE_WHEEL_DRIVE_FR.value:0>4b}' \
+                                            f'{CanMessageTypeIDs.MEASUREMENT.value:0>3b}'
         self.wheel_drive_FR_measurement_id = int(wheel_drive_fr_measurement_id_bin, 2)
 
-        wheel_drive_fl_measurement_id_bin = f'{CanClassIDs.CAN_CLASS_WHEEL_DRIVE:0>4b}' \
-                                            f'{CanDeviceIDs.CAN_DEVICE_WHEEL_DRIVE_FL:0>4b}' \
-                                            f'{CanMessageTypeIDs.CAN_MESSAGE_TYPE_MEASUREMENT:0>3b}'
+        wheel_drive_fl_measurement_id_bin = f'{CanClassIDs.CAN_CLASS_WHEEL_DRIVE.value:0>4b}' \
+                                            f'{CanDeviceIDs.CAN_DEVICE_WHEEL_DRIVE_FL.value:0>4b}' \
+                                            f'{CanMessageTypeIDs.MEASUREMENT.value:0>3b}'
         self.wheel_drive_FL_measurement_id = int(wheel_drive_fl_measurement_id_bin, 2)
 
-        wheel_drive_rr_measurement_id_bin = f'{CanClassIDs.CAN_CLASS_WHEEL_DRIVE:0>4b}' \
-                                            f'{CanDeviceIDs.CAN_DEVICE_WHEEL_DRIVE_RR:0>4b}' \
-                                            f'{CanMessageTypeIDs.CAN_MESSAGE_TYPE_MEASUREMENT:0>3b}'
+        wheel_drive_rr_measurement_id_bin = f'{CanClassIDs.CAN_CLASS_WHEEL_DRIVE.value:0>4b}' \
+                                            f'{CanDeviceIDs.CAN_DEVICE_WHEEL_DRIVE_RR.value:0>4b}' \
+                                            f'{CanMessageTypeIDs.MEASUREMENT.value:0>3b}'
         self.wheel_drive_RR_measurement_id = int(wheel_drive_rr_measurement_id_bin, 2)
 
-        wheel_drive_rl_measurement_id_bin = f'{CanClassIDs.CAN_CLASS_WHEEL_DRIVE:0>4b}' \
-                                            f'{CanDeviceIDs.CAN_DEVICE_WHEEL_DRIVE_RL:0>4b}' \
-                                            f'{CanMessageTypeIDs.CAN_MESSAGE_TYPE_MEASUREMENT:0>3b}'
+        wheel_drive_rl_measurement_id_bin = f'{CanClassIDs.CAN_CLASS_WHEEL_DRIVE.value:0>4b}' \
+                                            f'{CanDeviceIDs.CAN_DEVICE_WHEEL_DRIVE_RL.value:0>4b}' \
+                                            f'{CanMessageTypeIDs.MEASUREMENT.value:0>3b}'
         self.wheel_drive_RL_measurement_id = int(wheel_drive_rl_measurement_id_bin, 2)
 
     def on_message_received(self, msg: Message) -> None:
@@ -80,25 +80,25 @@ class WheelDriveListener(Listener):
             self.measurement_RL.velocity = self.byte_array_to_float(msg.data[4:-1])
 
         elif msg.arbitration_id == self.wheel_drive_FR_response_id:
-            if msg.data[0] == CanWheelDriveMessageIDs.RESPONSE_PING_FR:
+            if msg.data[0] == CanWheelDriveMessageIDs.RESPONSE_PING_FR.value:
                 self.flag_dw1 = True
             else:
                 self.flag_dw1 = False
 
         elif msg.arbitration_id == self.wheel_drive_FL_response_id:
-            if msg.data[0] == CanWheelDriveMessageIDs.RESPONSE_PING_FL:
+            if msg.data[0] == CanWheelDriveMessageIDs.RESPONSE_PING_FL.value:
                 self.flag_dw2 = True
             else:
                 self.flag_dw2 = False
 
         elif msg.arbitration_id == self.wheel_drive_RL_response_id:
-            if msg.data[0] == CanWheelDriveMessageIDs.RESPONSE_PING_RL:
+            if msg.data[0] == CanWheelDriveMessageIDs.RESPONSE_PING_RL.value:
                 self.flag_dw3 = True
             else:
                 self.flag_dw3 = False
 
         elif msg.arbitration_id == self.wheel_drive_RR_response_id:
-            if msg.data[0] == CanWheelDriveMessageIDs.RESPONSE_PING_RR:
+            if msg.data[0] == CanWheelDriveMessageIDs.RESPONSE_PING_RR.value:
                 self.flag_dw4 = True
             else:
                 self.flag_dw4 = False
