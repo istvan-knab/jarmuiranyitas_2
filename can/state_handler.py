@@ -19,14 +19,14 @@ class StateHandler:
         self.prev_state = init_state
         self.current_state = copy.deepcopy(self.prev_state)
 
+        self.network = can_network
+
         self.flags = {"idl": False, "drv": False, "ref": False}
         self.update_flags()
 
         self.ids = self.create_ids()
 
         self.reference = {"current": 0.0, "velocity": 0.0, "steering_angle": 0.0}
-
-        self.network = can_network
 
     def check(self):
         if self.prev_state != self.current_state:
@@ -54,9 +54,9 @@ class StateHandler:
         self.update_flags()
 
         if self.flags["lv"] and self.flags["hv"]:
-            self.current_state = InternalStates.START2.value
+            self.current_state = InternalStates.START2
         else:
-            self.current_state = InternalStates.ERR.value
+            self.current_state = InternalStates.ERR
             print("Battery is critical/dead")
 
         return self.current_state
@@ -66,10 +66,10 @@ class StateHandler:
         self.update_flags()
 
         if self.flags["dss"] and self.flags["dw1"] and self.flags["dw2"] and self.flags["dw3"] and self.flags["dw4"]:
-            self.current_state = InternalStates.START3.value
+            self.current_state = InternalStates.START3
 
         else:
-            self.current_state = InternalStates.ERR.value
+            self.current_state = InternalStates.ERR
             print("Discovery of unit(s) failed")
 
         return self.current_state
@@ -91,7 +91,7 @@ class StateHandler:
         self.network.send_message(arbitration_id=self.ids["cfg_wd_rl_id"], extended_id=False,
                                   data=cfg_wd_control_velocity_data)
 
-        self.current_state = InternalStates.IDLE.value
+        self.current_state = InternalStates.IDLE
         self.flags["idl"] = True
 
         return self.current_state
