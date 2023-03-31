@@ -40,8 +40,8 @@ class CANNetwork:
         pass
 
     @staticmethod
-    def generate_arbitration_id(class_id: hex, device_id: hex, message_type_id: hex):
-        arbitration_id_bin = f'{class_id}{device_id:0>4b}{message_type_id:0>3b}'
+    def generate_arbitration_id(class_id: int, device_id: int, message_type_id: int):
+        arbitration_id_bin = f'{class_id:0>4b}{device_id:0>4b}{message_type_id:0>3b}'
         arbitration_id = int(arbitration_id_bin, 2)
 
         return arbitration_id
