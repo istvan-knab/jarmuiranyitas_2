@@ -158,11 +158,21 @@ class StateHandler:
         return self.current_state
 
     def handle_err(self):
-        # TODO: SendWheelReferenceMsg
         self.flags["ref"] = 0
+        # TODO: SendWheelReferenceMsg
+        cmd_servo_state_idle = [CanServoMessageIDs.MODE, CanServoMessageIDs.MODE_IDLE]
+        self.network.send_message(arbitration_id=self.ids["cmd_Servo_id"], extended_id=False,
+                                  data=cmd_servo_state_idle)
 
-        # TODO: StateSteeringServo
-        # TODO: StateWheelDrive
+        cmd_wd_state_stopped_data = [CanWheelDriveMessageIDs.DRIVE_STATE, 0, CanWheelDriveMessageIDs.STOPPED, 0]
+        self.network.send_message(arbitration_id=self.ids["cmd_wd_fr_id"], extended_id=False,
+                                  data=cmd_wd_state_stopped_data)
+        self.network.send_message(arbitration_id=self.ids["cmd_wd_fl_id"], extended_id=False,
+                                  data=cmd_wd_state_stopped_data)
+        self.network.send_message(arbitration_id=self.ids["cmd_wd_rr_id"], extended_id=False,
+                                  data=cmd_wd_state_stopped_data)
+        self.network.send_message(arbitration_id=self.ids["cmd_wd_rl_id"], extended_id=False,
+                                  data=cmd_wd_state_stopped_data)
 
         return self.current_state
 
