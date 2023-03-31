@@ -158,7 +158,12 @@ class StateHandler:
         return self.current_state
 
     def handle_err(self):
-        # TODO:
+        # TODO: SendWheelReferenceMsg
+        self.flags["ref"] = 0
+
+        # TODO: StateSteeringServo
+        # TODO: StateWheelDrive
+
         return self.current_state
 
     def create_ids(self):
