@@ -126,11 +126,24 @@ class StateHandler:
 
         self.flags["idl"] = False
 
+        ####
+        self.flags["drv"] = True
+        self.current_state = InternalStates.DRIVE
+        ####
+
         return self.current_state
 
     def handle_drive(self):
         if self.flags["drv"]:
             self.flags["ref"] = True
+
+            cmd_vsrv_on_data = [CanPowerManagementMessageIDs.VSRV.value, CanPowerManagementMessageIDs.ON.value]
+            self.network.send_message(arbitration_id=self.ids["cmd_pm_id"], extended_id=False, data=cmd_vsrv_on_data)
+            self.network.sleep(duration_ms=1500)
+
+            cmd_hvdc_on_data = [CanPowerManagementMessageIDs.HVDC.value, CanPowerManagementMessageIDs.ON.value]
+            self.network.send_message(arbitration_id=self.ids["cmd_pm_id"], extended_id=False, data=cmd_hvdc_on_data)
+            self.network.sleep(duration_ms=1500)
 
             cmd_wd_mode_drive_data = [CanWheelDriveMessageIDs.MODE.value, 0, CanWheelDriveMessageIDs.DRIVE.value, 0]
             self.network.send_message(arbitration_id=self.ids["cmd_wd_fr_id"], extended_id=False,
@@ -153,8 +166,7 @@ class StateHandler:
             self.network.send_message(arbitration_id=self.ids["cmd_wd_rl_id"], extended_id=False,
                                       data=cmd_wd_state_started_data)
         self.flags["drv"] = False
-        self.reference["velocity"] = 0.0
-        self.network.sleep(duration_ms=5)
+        # TODO: references by controller
         
         return self.current_state
 
@@ -162,7 +174,7 @@ class StateHandler:
         self.flags["ref"] = False
         # TODO: SendWheelReferenceMsg
         cmd_servo_state_idle = [CanServoMessageIDs.MODE.value, CanServoMessageIDs.MODE_IDLE.value]
-        self.network.send_message(arbitration_id=self.ids["cmd_Servo_id"], extended_id=False,
+        self.network.send_message(arbitration_id=self.ids["cmd_servo_id"], extended_id=False,
                                   data=cmd_servo_state_idle)
 
         cmd_wd_state_stopped_data = [CanWheelDriveMessageIDs.DRIVE_STATE.value, 0,
@@ -189,7 +201,7 @@ class StateHandler:
         cmd_servo_id = self.network.generate_arbitration_id(class_id=CanClassIDs.CAN_CLASS_SERVO.value,
                                                             device_id=CanDeviceIDs.CAN_DEVICE_SERVO.value,
                                                             message_type_id=CanMessageTypeIDs.COMMAND.value)
-        ids["cmd_Servo_id"] = cmd_servo_id
+        ids["cmd_servo_id"] = cmd_servo_id
 
         cfg_wd_fr_id = self.network.generate_arbitration_id(class_id=CanClassIDs.CAN_CLASS_WHEEL_DRIVE.value,
                                                             device_id=CanDeviceIDs.CAN_DEVICE_WHEEL_DRIVE_FR.value,
@@ -232,11 +244,12 @@ class StateHandler:
         ids["cmd_wd_rl_id"] = cmd_wd_rl_id
 
         return ids
-    
+
     def discover_units(self):
-        cmd_discover_data = [CanWheelDriveMessageIDs.DISCOVER, 0]
+        cmd_discover_data = [CanWheelDriveMessageIDs.DISCOVER.value, 0]
         self.network.send_message(arbitration_id=self.ids["cmd_wd_rr_id"], extended_id=False, data=cmd_discover_data)
         self.network.send_message(arbitration_id=self.ids["cmd_wd_rl_id"], extended_id=False, data=cmd_discover_data)
         self.network.send_message(arbitration_id=self.ids["cmd_wd_fr_id"], extended_id=False, data=cmd_discover_data)
         self.network.send_message(arbitration_id=self.ids["cmd_wd_fl_id"], extended_id=False, data=cmd_discover_data)
-        self.network.send_message(arbitration_id=self.ids["cmd_Servo_id"], extended_id=False, data=cmd_discover_data)
+        self.network.send_message(arbitration_id=self.ids["cmd_servo_id"], extended_id=False, data=cmd_discover_data)
+        self.network.sleep(1000)
