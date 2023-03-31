@@ -123,11 +123,16 @@ class StateHandler:
             cmd_rl_drive_state = self.network.generate_arbitration_id(class_id=CanClassIDs.CAN_CLASS_WHEEL_DRIVE,
                                                            device_id=CanDeviceIDs.CAN_DEVICE_WHEEL_DRIVE_RL,
                                                            message_type_id=CanMessageTypeIDs.CAN_MESSAGE_TYPE_COMMAND)
-            cfg_message = [CanWheelDriveMessageIDs.DRIVE_STATE, 0, CanWheelDriveMessageIDs.STOPPED, 0]
-            self.network.send_message(arbitration_id=cmd_fr_drive_state, extended_id=False,data=cfg_message)
-            self.network.send_message(arbitration_id=cmd_fl_drive_state, extended_id=False, data=cfg_message)
-            self.network.send_message(arbitration_id=cmd_rr_drive_state, extended_id=False, data=cfg_message)
-            self.network.send_message(arbitration_id=cmd_rl_drive_state, extended_id=False, data=cfg_message)
+            cmd_drive_mode = [CanWheelDriveMessageIDs.MODE, 0, CanWheelDriveMessageIDs.DRIVE, 0]
+            cmd_stop = [CanWheelDriveMessageIDs.DRIVE_STATE, 0, CanWheelDriveMessageIDs.STOPPED, 0]
+            self.network.send_message(arbitration_id=cmd_fr_drive_state, extended_id=False, data=cmd_drive_mode)
+            self.network.send_message(arbitration_id=cmd_fl_drive_state, extended_id=False, data=cmd_drive_mode)
+            self.network.send_message(arbitration_id=cmd_rr_drive_state, extended_id=False, data=cmd_drive_mode)
+            self.network.send_message(arbitration_id=cmd_rl_drive_state, extended_id=False, data=cmd_drive_mode)
+            self.network.send_message(arbitration_id=cmd_fr_drive_state, extended_id=False,data=cmd_stop)
+            self.network.send_message(arbitration_id=cmd_fl_drive_state, extended_id=False, data=cmd_stop)
+            self.network.send_message(arbitration_id=cmd_rr_drive_state, extended_id=False, data=cmd_stop)
+            self.network.send_message(arbitration_id=cmd_rl_drive_state, extended_id=False, data=cmd_stop)
 
             self.reference["velocity"] = 0
             self.reference["current"] = 0
@@ -168,4 +173,6 @@ class StateHandler:
 
     def handle_err(self):
         # TODO:
+        self.flags["ref"] = 0
+        
         return self.current_state
