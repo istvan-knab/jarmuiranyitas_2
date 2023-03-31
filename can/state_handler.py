@@ -62,7 +62,7 @@ class StateHandler:
         return self.current_state
 
     def handle_start2(self):
-        self.network.discover_units()
+        self.discover_units()
         self.update_flags()
 
         if self.flags["dss"] and self.flags["dw1"] and self.flags["dw2"] and self.flags["dw3"] and self.flags["dw4"]:
@@ -232,3 +232,11 @@ class StateHandler:
         ids["cmd_wd_rl_id"] = cmd_wd_rl_id
 
         return ids
+    
+    def discover_units(self):
+        cmd_discover_data = [CanWheelDriveMessageIDs.DISCOVER, 0]
+        self.network.send_message(arbitration_id=self.ids["cmd_wd_rr_id"], extended_id=False, data=cmd_discover_data)
+        self.network.send_message(arbitration_id=self.ids["cmd_wd_rl_id"], extended_id=False, data=cmd_discover_data)
+        self.network.send_message(arbitration_id=self.ids["cmd_wd_fr_id"], extended_id=False, data=cmd_discover_data)
+        self.network.send_message(arbitration_id=self.ids["cmd_wd_fl_id"], extended_id=False, data=cmd_discover_data)
+        self.network.send_message(arbitration_id=self.ids["cmd_Servo_id"], extended_id=False, data=cmd_discover_data)
