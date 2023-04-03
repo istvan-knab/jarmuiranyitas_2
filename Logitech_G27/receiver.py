@@ -8,20 +8,19 @@ import cv2
 
 def main():
 
-    # Orin IPv6 address:
-    # fc94:776b:33a5:6f6a:337c:2e85:bc5e:da98
+    orin = "fc94:776b:33a5:6f6a:337c:2e85:bc5e:da98"
+    balint_pc = "fc94:f3ae:8c82:1e80:c8ff:9154:6bc0:7252"
+    kry_pc = "fc94:2785:f398:aa83:638f:aa15:a4fd:8e17"
 
-    # balint_pc
-    # fc94:f3ae:8c82:1e80:c8ff:9154:6bc0:7252
-
-    # kry_pc
-    # fc94:2785:f398:aa83:638f:aa15:a4fd:8e17
+    local = "127.0.0.1"
 
     init = sl.InitParameters()
-    init.camera_resolution = sl.RESOLUTION.HD720
+    # init.camera_resolution = sl.RESOLUTION.HD720
+    init.camera_resolution = sl.RESOLUTION.HD1080
+
     init.depth_mode = sl.DEPTH_MODE.PERFORMANCE
 
-    init.set_from_stream("127.0.0.1", 30000)
+    init.set_from_stream(local, 30000)
 
     cam = sl.Camera()
     status = cam.open(init)
