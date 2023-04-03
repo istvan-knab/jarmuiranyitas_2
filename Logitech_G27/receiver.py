@@ -8,6 +8,9 @@ import cv2
 
 def main():
 
+    # Orin IPv6 address:
+    # fc94:776b:33a5:6f6a:337c:2e85:bc5e:da98
+
     init = sl.InitParameters()
     init.camera_resolution = sl.RESOLUTION.HD720
     init.depth_mode = sl.DEPTH_MODE.PERFORMANCE
