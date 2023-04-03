@@ -13,4 +13,5 @@ class UDPReceiver:
 
     def receive(self):
         data, address = self.sock.recvfrom(1024)
-        pprint(json.loads(data))
+
+        return data, address
