@@ -12,12 +12,7 @@ def main():
     init.camera_resolution = sl.RESOLUTION.HD720
     init.depth_mode = sl.DEPTH_MODE.PERFORMANCE
 
-    if (len(sys.argv) > 1) :
-        ip = sys.argv[1]
-        init.set_from_stream(ip)
-    else :
-        print('Usage : python3 streaming_receiver.py ip')
-        exit(1)
+    init.set_from_stream("127.0.0.1", 30000)
 
     cam = sl.Camera()
     status = cam.open(init)
