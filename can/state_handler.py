@@ -127,7 +127,7 @@ class StateHandler:
         self.flags["idl"] = False
 
         ####
-        self.flags["drv"] = True
+        self.flags["drv"] = self.network.udp_listener.enable_drive()
         self.current_state = InternalStates.DRIVE
         ####
 
