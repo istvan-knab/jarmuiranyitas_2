@@ -193,53 +193,53 @@ class StateHandler:
     def create_ids(self):
         ids = {}
 
-        cmd_pm_id = self.network.generate_arbitration_id(class_id=CanClassIDs.CAN_CLASS_POWER_MANAGEMENT.value,
-                                                         device_id=CanDeviceIDs.CAN_DEVICE_POWER_MANAGEMENT.value,
+        cmd_pm_id = self.network.generate_arbitration_id(class_id=CanClassIDs.POWER_MANAGEMENT.value,
+                                                         device_id=CanDeviceIDs.POWER_MANAGEMENT.value,
                                                          message_type_id=CanMessageTypeIDs.COMMAND.value)
         ids["cmd_pm_id"] = cmd_pm_id
 
-        cmd_servo_id = self.network.generate_arbitration_id(class_id=CanClassIDs.CAN_CLASS_SERVO.value,
-                                                            device_id=CanDeviceIDs.CAN_DEVICE_SERVO.value,
+        cmd_servo_id = self.network.generate_arbitration_id(class_id=CanClassIDs.SERVO.value,
+                                                            device_id=CanDeviceIDs.SERVO.value,
                                                             message_type_id=CanMessageTypeIDs.COMMAND.value)
         ids["cmd_servo_id"] = cmd_servo_id
 
-        cfg_wd_fr_id = self.network.generate_arbitration_id(class_id=CanClassIDs.CAN_CLASS_WHEEL_DRIVE.value,
-                                                            device_id=CanDeviceIDs.CAN_DEVICE_WHEEL_DRIVE_FR.value,
+        cfg_wd_fr_id = self.network.generate_arbitration_id(class_id=CanClassIDs.WHEEL_DRIVE.value,
+                                                            device_id=CanDeviceIDs.WHEEL_DRIVE_FR.value,
                                                             message_type_id=CanMessageTypeIDs.CONFIG.value)
         ids["cfg_wd_fr_id"] = cfg_wd_fr_id
 
-        cfg_wd_fl_id = self.network.generate_arbitration_id(class_id=CanClassIDs.CAN_CLASS_WHEEL_DRIVE.value,
-                                                            device_id=CanDeviceIDs.CAN_DEVICE_WHEEL_DRIVE_FL.value,
+        cfg_wd_fl_id = self.network.generate_arbitration_id(class_id=CanClassIDs.WHEEL_DRIVE.value,
+                                                            device_id=CanDeviceIDs.WHEEL_DRIVE_FL.value,
                                                             message_type_id=CanMessageTypeIDs.CONFIG.value)
         ids["cfg_wd_fl_id"] = cfg_wd_fl_id
 
-        cfg_wd_rl_id = self.network.generate_arbitration_id(class_id=CanClassIDs.CAN_CLASS_WHEEL_DRIVE.value,
-                                                            device_id=CanDeviceIDs.CAN_DEVICE_WHEEL_DRIVE_RL.value,
+        cfg_wd_rl_id = self.network.generate_arbitration_id(class_id=CanClassIDs.WHEEL_DRIVE.value,
+                                                            device_id=CanDeviceIDs.WHEEL_DRIVE_RL.value,
                                                             message_type_id=CanMessageTypeIDs.CONFIG.value)
         ids["cfg_wd_rl_id"] = cfg_wd_rl_id
 
-        cfg_wd_rr_id = self.network.generate_arbitration_id(class_id=CanClassIDs.CAN_CLASS_WHEEL_DRIVE.value,
-                                                            device_id=CanDeviceIDs.CAN_DEVICE_WHEEL_DRIVE_RR.value,
+        cfg_wd_rr_id = self.network.generate_arbitration_id(class_id=CanClassIDs.WHEEL_DRIVE.value,
+                                                            device_id=CanDeviceIDs.WHEEL_DRIVE_RR.value,
                                                             message_type_id=CanMessageTypeIDs.CONFIG.value)
         ids["cfg_wd_rr_id"] = cfg_wd_rr_id
 
-        cmd_wd_fr_id = self.network.generate_arbitration_id(class_id=CanClassIDs.CAN_CLASS_WHEEL_DRIVE.value,
-                                                            device_id=CanDeviceIDs.CAN_DEVICE_WHEEL_DRIVE_FR.value,
+        cmd_wd_fr_id = self.network.generate_arbitration_id(class_id=CanClassIDs.WHEEL_DRIVE.value,
+                                                            device_id=CanDeviceIDs.WHEEL_DRIVE_FR.value,
                                                             message_type_id=CanMessageTypeIDs.COMMAND.value)
         ids["cmd_wd_fr_id"] = cmd_wd_fr_id
 
-        cmd_wd_fl_id = self.network.generate_arbitration_id(class_id=CanClassIDs.CAN_CLASS_WHEEL_DRIVE.value,
-                                                            device_id=CanDeviceIDs.CAN_DEVICE_WHEEL_DRIVE_FL.value,
+        cmd_wd_fl_id = self.network.generate_arbitration_id(class_id=CanClassIDs.WHEEL_DRIVE.value,
+                                                            device_id=CanDeviceIDs.WHEEL_DRIVE_FL.value,
                                                             message_type_id=CanMessageTypeIDs.COMMAND.value)
         ids["cmd_wd_fl_id"] = cmd_wd_fl_id
 
-        cmd_wd_rr_id = self.network.generate_arbitration_id(class_id=CanClassIDs.CAN_CLASS_WHEEL_DRIVE.value,
-                                                            device_id=CanDeviceIDs.CAN_DEVICE_WHEEL_DRIVE_RR.value,
+        cmd_wd_rr_id = self.network.generate_arbitration_id(class_id=CanClassIDs.WHEEL_DRIVE.value,
+                                                            device_id=CanDeviceIDs.WHEEL_DRIVE_RR.value,
                                                             message_type_id=CanMessageTypeIDs.COMMAND.value)
         ids["cmd_wd_rr_id"] = cmd_wd_rr_id
 
-        cmd_wd_rl_id = self.network.generate_arbitration_id(class_id=CanClassIDs.CAN_CLASS_WHEEL_DRIVE.value,
-                                                            device_id=CanDeviceIDs.CAN_DEVICE_WHEEL_DRIVE_RL.value,
+        cmd_wd_rl_id = self.network.generate_arbitration_id(class_id=CanClassIDs.WHEEL_DRIVE.value,
+                                                            device_id=CanDeviceIDs.WHEEL_DRIVE_RL.value,
                                                             message_type_id=CanMessageTypeIDs.COMMAND.value)
         ids["cmd_wd_rl_id"] = cmd_wd_rl_id
 
