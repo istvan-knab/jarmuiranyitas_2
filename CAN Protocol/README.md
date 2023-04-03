@@ -10,7 +10,24 @@ CAN is a vehicle communication protocol, which is developed by Bosch. The idea b
 The arbitration field contains 3 identifier, which determines who will be addressed. The first 4 bits mean the class of the data, the second 4 bits mean the desired device and thelast 3 bits determine the type of the message.
 
 ## Devices
+- Message types: - COMMAND `0x00` </br>
+&emsp; &emsp; &emsp; &emsp; &emsp; &emsp; -  RESPONSE `0x01` </br>
+&emsp; &emsp; &emsp; &emsp; &emsp; &emsp; -  REFERENCE `0x02` </br>
+&emsp; &emsp; &emsp; &emsp; &emsp; &emsp; -  MEASURMENT `0x03` </br>
+&emsp; &emsp; &emsp; &emsp; &emsp; &emsp; -  STATUS `0x04` </br>
+&emsp; &emsp; &emsp; &emsp; &emsp; &emsp; -  CONFIG `0x05` </br>
+&emsp; &emsp; &emsp; &emsp; &emsp; &emsp; -  SPECIAL MESSAGE TYPE `0x06` </br>
+&emsp; &emsp; &emsp; &emsp; &emsp; &emsp; -  MESSAGE TYPE EXTENSION `0x07` </br>
+
 ### Power Management
+- Class ID :  `0x0E`
+- Device ID: `0x01`
+
+> VSRV
+- Message type :  `0x00`
+> HVDC
+> Power Management Status
+> Power Management Measurments
 ### Servo
 ### Front Right Wheel
 ### Front Left Wheel
