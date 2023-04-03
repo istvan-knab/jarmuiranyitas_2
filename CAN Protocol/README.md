@@ -6,6 +6,13 @@ CAN is a vehicle communication protocol, which is developed by Bosch. The idea b
 
 <img align="center" src="https://github.com/istvan-knab/jarmuiranyitas_2/blob/main/Old%20Documentation/Pictures/CAN-bus-frame-standard-message-SOF-ID-RTR-Control-Data-CRC-ACK-EOF.svg">
 
-## Message meaning
 ## Adressing devices
 The arbitration field contains 3 identifier, which determines who will be addressed. The first 4 bits mean the class of the data, the second 4 bits mean the desired device and thelast 3 bits determine the type of the message.
+
+## Devices
+### Power Management
+### Servo
+### Front Right Wheel
+### Front Left Wheel
+### Rear Right Wheel
+### Rear Left Wheel
