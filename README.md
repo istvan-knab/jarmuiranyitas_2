@@ -19,6 +19,7 @@ https://drive.google.com/drive/folders/1CZQcddJfMFzFaR6hJL0l49vW3KqHnq_u
 
 The vehicle is a 1:5 scale car mounted with PMSM motors on each wheel. The CAN network consists of four wheels and the servo which will be used as actuators, but there are other modules that can send messages to other nodes like the Power Management Unit. Addressing will be declared in the CAN folder. Each wheel can get different values of velocity and torque depending on the configuration.
 
+
 ## Task ✒️
 
 The first task is to realize steering without giving any commands to the servo, only using torque vectoring.
