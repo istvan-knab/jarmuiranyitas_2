@@ -4,6 +4,8 @@ from time import sleep
 from jarmuiranyitas_2.can.listeners.wheel_drive_listener import WheelDriveListener
 from jarmuiranyitas_2.can.listeners.servo_listener import ServoListener
 from jarmuiranyitas_2.can.listeners.power_management_listener import PowerManagementListener
+from jarmuiranyitas_2.can.listeners.udp_listener import UDPListener
+
 
 
 class CANNetwork:
@@ -15,6 +17,7 @@ class CANNetwork:
         self.wheel_drive_listener = WheelDriveListener()
         self.servo_listener = ServoListener()
         self.power_management_listener = PowerManagementListener()
+        self.udp_listener = UDPListener()
 
         self.notifier = can.Notifier(bus=self.bus, listeners=[self.wheel_drive_listener, self.servo_listener,
                                                               self.power_management_listener])
