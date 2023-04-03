@@ -1,4 +1,6 @@
 import socket
+import json
+from time import sleep
 
 
 class UDPReceiver:
@@ -9,7 +11,15 @@ class UDPReceiver:
         self.sock = socket.socket(socket.AF_INET6, socket.SOCK_DGRAM)
         self.sock.bind((self.udp_ip, self.udp_port))
 
-    def receive(self):
-        data, address = self.sock.recvfrom(1024)
+        self.last_data = {"steering_angle": 0.0,
+                          "current": [0.0, 0.0, 0.0, 0.0],
+                          "velocity": [0.0, 0.0, 0.0, 0.0],
+                          }
 
-        return data, address
+    def receive(self):
+        while True:
+            encoded_data, address = self.sock.recvfrom(1024)
+            decoded_data = json.loads(encoded_data)
+
+            self.last_data.update(decoded_data)
+            sleep(0.1)
