@@ -1,6 +1,4 @@
 import socket
-import json
-from pprint import pprint
 
 
 class UDPReceiver:
