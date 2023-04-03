@@ -5,7 +5,7 @@
 
 NAME=jarmuiranyitas_2
 TOKEN=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
-REPO=https://oauth2:$TOKEN@github.com/MateKristof/$NAME.git
+REPO=https://oauth2:$TOKEN@github.com/istvan-knab/$NAME.git
 
 #[ -d $NAME ] || git clone $REPO
 #git -C $NAME pull
