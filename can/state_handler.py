@@ -1,5 +1,5 @@
 import copy
-from time import sleep
+import struct
 
 from jarmuiranyitas_2.can.network import CANNetwork
 from jarmuiranyitas_2.can.internal_states import InternalStates
@@ -26,7 +26,9 @@ class StateHandler:
 
         self.ids = self.create_ids()
 
-        self.reference = {"current": 0.0, "velocity": 0.0, "steering_angle": 0.0}
+        self.reference = {"current": [0.0, 0.0, 0.0, 0.0],
+                          "velocity": [0.0, 0.0, 0.0, 0.0],
+                          "steering_angle": 0.0}
 
     def check(self):
         if self.prev_state != self.current_state:
@@ -36,6 +38,9 @@ class StateHandler:
     def update_flags(self):
         flags_from_network = self.network.get_flags()
         self.flags.update(flags_from_network)
+
+    def set_ref_vals(self, ref_vals: dict):
+        self.reference.update(ref_vals)
 
     def get_current_state(self):
         self.check()
@@ -119,8 +124,8 @@ class StateHandler:
             self.network.send_message(arbitration_id=self.ids["cmd_wd_rl_id"], extended_id=False,
                                       data=cmd_wd_state_stopped_data)
 
-            self.reference["velocity"] = 0
-            self.reference["current"] = 0
+            self.reference["velocity"] = [0.0, 0.0, 0.0, 0.0]
+            self.reference["current"] = [0.0, 0.0, 0.0, 0.0]
             self.reference["steering_angle"] = 0
             self.flags["ref"] = False
 
@@ -165,8 +170,10 @@ class StateHandler:
                                       data=cmd_wd_state_started_data)
             self.network.send_message(arbitration_id=self.ids["cmd_wd_rl_id"], extended_id=False,
                                       data=cmd_wd_state_started_data)
-        self.flags["drv"] = False
-        # TODO: references by controller
+
+            self.flags["drv"] = False
+
+        self.send_reference()
         
         return self.current_state
 
@@ -243,6 +250,31 @@ class StateHandler:
                                                             message_type_id=CanMessageTypeIDs.COMMAND.value)
         ids["cmd_wd_rl_id"] = cmd_wd_rl_id
 
+        ref_wd_fr_id = self.network.generate_arbitration_id(class_id=CanClassIDs.WHEEL_DRIVE.value,
+                                                            device_id=CanDeviceIDs.WHEEL_DRIVE_FR.value,
+                                                            message_type_id=CanMessageTypeIDs.REFERENCE.value)
+        ids["ref_wd_fr_id"] = ref_wd_fr_id
+
+        ref_wd_fl_id = self.network.generate_arbitration_id(class_id=CanClassIDs.WHEEL_DRIVE.value,
+                                                            device_id=CanDeviceIDs.WHEEL_DRIVE_FL.value,
+                                                            message_type_id=CanMessageTypeIDs.REFERENCE.value)
+        ids["ref_wd_fl_id"] = ref_wd_fl_id
+
+        ref_wd_rl_id = self.network.generate_arbitration_id(class_id=CanClassIDs.WHEEL_DRIVE.value,
+                                                            device_id=CanDeviceIDs.WHEEL_DRIVE_RL.value,
+                                                            message_type_id=CanMessageTypeIDs.REFERENCE.value)
+        ids["ref_wd_rl_id"] = ref_wd_rl_id
+
+        ref_wd_rr_id = self.network.generate_arbitration_id(class_id=CanClassIDs.WHEEL_DRIVE.value,
+                                                            device_id=CanDeviceIDs.WHEEL_DRIVE_RR.value,
+                                                            message_type_id=CanMessageTypeIDs.REFERENCE.value)
+        ids["ref_wd_rr_id"] = ref_wd_rr_id
+
+        ref_servo_id = self.network.generate_arbitration_id(class_id=CanClassIDs.SERVO.value,
+                                                            device_id=CanDeviceIDs.SERVO.value,
+                                                            message_type_id=CanMessageTypeIDs.REFERENCE.value)
+        ids["ref_servo_id"] = ref_servo_id
+
         return ids
 
     def discover_units(self):
@@ -253,3 +285,24 @@ class StateHandler:
         self.network.send_message(arbitration_id=self.ids["cmd_wd_fl_id"], extended_id=False, data=cmd_discover_data)
         self.network.send_message(arbitration_id=self.ids["cmd_servo_id"], extended_id=False, data=cmd_discover_data)
         self.network.sleep(1000)
+
+    def send_reference(self):
+        ref_wd_fr_data = self.get_byte_array(self.reference["velocity"][0])
+        ref_wd_fl_data = self.get_byte_array(self.reference["velocity"][1])
+        ref_wd_rl_data = self.get_byte_array(self.reference["velocity"][2])
+        ref_wd_rr_data = self.get_byte_array(self.reference["velocity"][3])
+        ref_servo_data = self.get_byte_array(self.reference["steering_angle"])
+
+        self.network.send_message(arbitration_id=self.ids["ref_wd_fr_id"], extended_id=False, data=ref_wd_fr_data)
+        self.network.send_message(arbitration_id=self.ids["ref_wd_fl_id"], extended_id=False, data=ref_wd_fl_data)
+        self.network.send_message(arbitration_id=self.ids["ref_wd_rl_id"], extended_id=False, data=ref_wd_rl_data)
+        self.network.send_message(arbitration_id=self.ids["ref_wd_rr_id"], extended_id=False, data=ref_wd_rr_data)
+        self.network.send_message(arbitration_id=self.ids["ref_servo_id"], extended_id=False, data=ref_servo_data)
+        self.network.sleep(duration_ms=100)
+
+    @staticmethod
+    def get_byte_array(data: float):
+        data_byte_array = bytearray(struct.pack("<f", data))
+        data_list = [data_byte_array[i] for i in range(4)]
+
+        return data_list
