@@ -1,3 +1,4 @@
+import can
 from time import sleep
 
 from jarmuiranyitas_2.can.listeners.wheel_drive_listener import WheelDriveListener
@@ -18,7 +19,7 @@ class CANNetwork:
         self.notifier = can.Notifier(bus=self.bus, listeners=[self.wheel_drive_listener, self.servo_listener,
                                                               self.power_management_listener])
 
-    def send_message(self, arbitration_id: hex, extended_id: bool, data: list[hex], timeout: float = 0.1):
+    def send_message(self, arbitration_id: hex, extended_id: bool, data: list, timeout: float = 0.1):
         message = can.Message(arbitration_id=arbitration_id, is_extended_id=extended_id, data=data)
         self.bus.send(message, timeout=timeout)
 
