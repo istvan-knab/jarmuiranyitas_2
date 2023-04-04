@@ -1,13 +1,12 @@
 import os
 import sys
-
 from multiprocessing import Process
-
-from jarmuiranyitas_2.can.can import CAN
-from jarmuiranyitas_2.udp.IPv6_udp_receiver import UDPReceiver
 
 PROJECT_DIR = os.path.dirname(os.path.abspath("main.py"))
 sys.path.append(os.path.dirname(PROJECT_DIR))
+
+from jarmuiranyitas_2.can.can import CAN
+from jarmuiranyitas_2.udp.IPv6_udp_receiver import UDPReceiver
 
 
 def main():
