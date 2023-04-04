@@ -1,4 +1,3 @@
-import can
 from time import sleep
 
 from jarmuiranyitas_2.can.listeners.wheel_drive_listener import WheelDriveListener
