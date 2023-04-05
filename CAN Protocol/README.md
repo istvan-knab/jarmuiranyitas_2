@@ -12,10 +12,10 @@ The arbitration field contains 3 identifier, which determines who will be addres
 ## Devices ➡️
 ## Message types: 
 
-COMMAND `0x00` &emsp; &emsp; &emsp;&emsp;&emsp; STATUS `0x04` </br>
-RESPONSE `0x01` &emsp; &emsp; &emsp; &emsp;&emsp; CONFIG `0x05` </br>
-REFERENCE `0x02` &emsp; &emsp; &emsp; &emsp; SPECIAL MESSAGE TYPE `0x06` </br>
-MEASURMENT `0x03` &emsp; &emsp; &emsp; MESSAGE TYPE EXTENSION `0x07`
+COMMAND &emsp;&ensp;`0x00` &emsp; &emsp; &emsp;&emsp;&ensp;&nbsp; STATUS &emsp; &emsp; &emsp;&emsp; &emsp; &emsp; &emsp; &ensp;  `0x04` </br>
+RESPONSE &emsp;&ensp;  `0x01` &emsp; &emsp; &emsp; &emsp;&ensp; CONFIG &emsp; &emsp; &emsp;&emsp; &emsp; &emsp; &emsp; &ensp;`0x05` </br>
+REFERENCE &emsp; `0x02` &emsp; &emsp; &emsp; &emsp;&ensp; SPECIAL MESSAGE TYPE &emsp; `0x06` </br>
+MEASURMENT `0x03` &emsp; &emsp; &emsp;&emsp;&ensp; MESSAGE TYPE EXTENSION `0x07`
 
 
 
@@ -23,10 +23,28 @@ MEASURMENT `0x03` &emsp; &emsp; &emsp; MESSAGE TYPE EXTENSION `0x07`
 - Class ID :  `0x0E`
 - Device ID: `0x01`
 
-> VSRV
+> VSRV ( Command )
 - Message type :  `0x00`
-> HVDC
+- DLC : 2
+
+|     Bytes     |    Message    |     Data    |
+| ------------- | ------------- |-------------|
+|      0        |    CMD VSRV   |    0x20     |
+|      1        |    VSRV ON    |    0x01     |
+|      1        |    VSRV OFF   |    0x02     |
+
+> HVDC ( Command )
+- Message type :  `0x00`
+- DLC : 2
+
+|     Bytes     |    Message    |     Data    |
+| ------------- | ------------- |-------------|
+|      0        |    CMD HVDC   |    0x30     |
+|      1        |    HVDC ON    |    0x01     |
+|      1        |    HVDC OFF   |    0x02     |
 > Power Management Status
+- Message type :  `0x04`
+- DLC : 3
 > Power Management Measurments
 ### Servo
 ### Front Right Wheel
