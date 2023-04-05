@@ -11,8 +11,11 @@ The arbitration field contains 3 identifier, which determines who will be addres
 
 ## Devices ➡️
 ## Message types: 
-COMMAND `0x00`  &emsp; &emsp; &emsp; RESPONSE `0x01` &emsp; &emsp; &emsp; REFERENCE `0x02` &emsp; &emsp; &emsp;  MEASURMENT `0x03` &emsp; &emsp; &emsp;   STATUS `0x04` </br>  CONFIG `0x05` &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp;   SPECIAL MESSAGE TYPE `0x06` &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; MESSAGE TYPE EXTENSION `0x07`
-  
+
+COMMAND `0x00` &emsp; &emsp; &emsp;&emsp;&emsp; STATUS `0x04` </br>
+RESPONSE `0x01` &emsp; &emsp; &emsp; &emsp;&emsp; CONFIG `0x05` </br>
+REFERENCE `0x02` &emsp; &emsp; &emsp; &emsp; SPECIAL MESSAGE TYPE `0x06` </br>
+MEASURMENT `0x03` &emsp; &emsp; &emsp; MESSAGE TYPE EXTENSION `0x07`
 
 
 
