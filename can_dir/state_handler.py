@@ -57,6 +57,7 @@ class StateHandler:
         self.network.sleep(duration_ms=1500)
 
         self.update_flags()
+        self.network.sleep(duration_ms=100)
 
         if self.flags["lv"] and self.flags["hv"]:
             self.current_state = InternalStates.START2
@@ -64,10 +65,13 @@ class StateHandler:
             self.current_state = InternalStates.ERR
             print("Battery is critical/dead")
 
+        self.network.sleep(duration_ms=100)
+
         return self.current_state
 
     def handle_start2(self):
         self.discover_units()
+        self.network.sleep(duration_ms=1500)
         self.update_flags()
 
         if self.flags["dss"] and self.flags["dw1"] and self.flags["dw2"] and self.flags["dw3"] and self.flags["dw4"]:
@@ -76,6 +80,8 @@ class StateHandler:
         else:
             self.current_state = InternalStates.ERR
             print("Discovery of unit(s) failed")
+
+        self.network.sleep(duration_ms=100)
 
         return self.current_state
 
