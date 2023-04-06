@@ -1,9 +1,9 @@
 import can
 from time import sleep
 
-from jarmuiranyitas_2.can.listeners.wheel_drive_listener import WheelDriveListener
-from jarmuiranyitas_2.can.listeners.servo_listener import ServoListener
-from jarmuiranyitas_2.can.listeners.power_management_listener import PowerManagementListener
+from jarmuiranyitas_2.can_dir.listeners.wheel_drive_listener import WheelDriveListener
+from jarmuiranyitas_2.can_dir.listeners.servo_listener import ServoListener
+from jarmuiranyitas_2.can_dir.listeners.power_management_listener import PowerManagementListener
 
 
 class CANNetwork:

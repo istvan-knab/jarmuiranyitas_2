@@ -1,7 +1,7 @@
-from jarmuiranyitas_2.can.config import Config
-from jarmuiranyitas_2.can.network import CANNetwork
-from jarmuiranyitas_2.can.internal_states import InternalStates
-from jarmuiranyitas_2.can.state_handler import StateHandler
+from jarmuiranyitas_2.can_dir.config import Config
+from jarmuiranyitas_2.can_dir.network import CANNetwork
+from jarmuiranyitas_2.can_dir.internal_states import InternalStates
+from jarmuiranyitas_2.can_dir.state_handler import StateHandler
 
 
 class CAN:

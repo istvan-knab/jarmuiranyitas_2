@@ -1,10 +1,10 @@
 from can import Message
 
-from jarmuiranyitas_2.can.listeners.listener import Listener
-from jarmuiranyitas_2.can.ids.can_class_ids import CanClassIDs
-from jarmuiranyitas_2.can.ids.can_device_ids import CanDeviceIDs
-from jarmuiranyitas_2.can.ids.can_message_type_ids import CanMessageTypeIDs
-from jarmuiranyitas_2.can.ids.can_power_management_message_ids import CanPowerManagementMessageIDs
+from jarmuiranyitas_2.can_dir.listeners.listener import Listener
+from jarmuiranyitas_2.can_dir.ids.can_class_ids import CanClassIDs
+from jarmuiranyitas_2.can_dir.ids.can_device_ids import CanDeviceIDs
+from jarmuiranyitas_2.can_dir.ids.can_message_type_ids import CanMessageTypeIDs
+from jarmuiranyitas_2.can_dir.ids.can_power_management_message_ids import CanPowerManagementMessageIDs
 
 
 class PowerManagementListener(Listener):
