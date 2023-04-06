@@ -29,9 +29,9 @@ MEASURMENT `0x03` &emsp; &emsp; &emsp;&emsp;&ensp; MESSAGE TYPE EXTENSION `0x07`
 
 |  Byte offset  |    Message    |     Data    |     Format   |
 | ------------- | ------------- |-------------|--------------|
-|      0        |    CMD VSRV   |    0x20     |              |
-|      1        |    VSRV ON    |    0x01     |              |
-|      1        |    VSRV OFF   |    0x02     |              |
+|      0        |    CMD VSRV   |    0x20     |      U8      |
+|      1        |    VSRV ON    |    0x01     |      U8      |
+|      1        |    VSRV OFF   |    0x02     |      U8      |
 
 > HVDC ( Command )
 - Message type :  `0x00`
@@ -39,9 +39,9 @@ MEASURMENT `0x03` &emsp; &emsp; &emsp;&emsp;&ensp; MESSAGE TYPE EXTENSION `0x07`
 
 |  Byte offset  |    Message    |     Data    |     Format   |
 | ------------- | ------------- |-------------|--------------|
-|      0        |    CMD HVDC   |    0x30     |              |
-|      1        |    HVDC ON    |    0x01     |              |
-|      1        |    HVDC OFF   |    0x02     |              |
+|      0        |    CMD HVDC   |    0x30     |      U8      |
+|      1        |    HVDC ON    |    0x01     |      U8      |
+|      1        |    HVDC OFF   |    0x02     |      U8      |
 > Power Management Status
 - Message type :  `0x04`
 - DLC : 3
