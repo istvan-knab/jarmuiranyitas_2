@@ -7,7 +7,7 @@ class Torque:
         self.torque_mid = 0.0
         self.wheel_torque = np.zeros(4)
         self.steering_angle = 0.0
-        self.pedal_gain = 1000
+        self.pedal_gain = 1
         self.input_angle_gain = 0.1
         self.wheels = ("front_right", "front_left", "rear_right", "rear_left")
         print(self.wheel_torque)

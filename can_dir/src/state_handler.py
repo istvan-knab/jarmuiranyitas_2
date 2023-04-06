@@ -303,10 +303,15 @@ class StateHandler:
         while True:
             self.network.sleep(duration_ms=100)
 
-            ref_wd_fr_data = self.get_wd_reference_msg(self.reference["current"][0], self.reference["velocity"][0])
-            ref_wd_fl_data = self.get_wd_reference_msg(self.reference["current"][1], self.reference["velocity"][1])
-            ref_wd_rl_data = self.get_wd_reference_msg(self.reference["current"][2], self.reference["velocity"][2])
-            ref_wd_rr_data = self.get_wd_reference_msg(self.reference["current"][3], self.reference["velocity"][3])
+            # ref_wd_fr_data = self.get_wd_reference_msg(self.reference["current"][0], self.reference["velocity"][0])
+            # ref_wd_fl_data = self.get_wd_reference_msg(self.reference["current"][1], self.reference["velocity"][1])
+            # ref_wd_rl_data = self.get_wd_reference_msg(self.reference["current"][2], self.reference["velocity"][2])
+            # ref_wd_rr_data = self.get_wd_reference_msg(self.reference["current"][3], self.reference["velocity"][3])
+            vel = self.controller.distribution(torque_mid=50, steering_angle=self.reference["steering_angle"])
+            ref_wd_fr_data = self.get_wd_reference_msg(self.reference["current"][0], vel[0])
+            ref_wd_fl_data = self.get_wd_reference_msg(self.reference["current"][1], vel[1])
+            ref_wd_rl_data = self.get_wd_reference_msg(self.reference["current"][2], vel[2])
+            ref_wd_rr_data = self.get_wd_reference_msg(self.reference["current"][3], vel[3])
             ref_servo_data = self.get_servo_reference_msg(self.reference["steering_angle"])
 
             self.network.send_message(arbitration_id=self.ids["ref_wd_fr_id"], extended_id=False, data=ref_wd_fr_data)
