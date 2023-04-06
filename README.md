@@ -22,4 +22,6 @@ The vehicle is a 1:5 scale car mounted with PMSM motors on each wheel. The CAN n
 
 ## Task ✒️
 
-The first task is to realize steering without giving any commands to the servo, only using torque vectoring.
+- Model identification
+- Fix servo backlash
+- Mathematical description, find correlation between differential drive and turning radius
