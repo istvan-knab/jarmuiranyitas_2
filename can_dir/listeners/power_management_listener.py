@@ -1,10 +1,10 @@
 from can import Message
 
-from jarmuiranyitas_2.can.listeners.listener import Listener
-from jarmuiranyitas_2.can.ids.can_class_ids import CanClassIDs
-from jarmuiranyitas_2.can.ids.can_device_ids import CanDeviceIDs
-from jarmuiranyitas_2.can.ids.can_message_type_ids import CanMessageTypeIDs
-from jarmuiranyitas_2.can.ids.can_power_management_message_ids import CanPowerManagementMessageIDs
+from jarmuiranyitas_2.can_dir.listeners.listener import Listener
+from jarmuiranyitas_2.can_dir.ids.can_class_ids import CanClassIDs
+from jarmuiranyitas_2.can_dir.ids.can_device_ids import CanDeviceIDs
+from jarmuiranyitas_2.can_dir.ids.can_message_type_ids import CanMessageTypeIDs
+from jarmuiranyitas_2.can_dir.ids.can_power_management_message_ids import CanPowerManagementMessageIDs
 
 
 class PowerManagementListener(Listener):
@@ -14,13 +14,13 @@ class PowerManagementListener(Listener):
         self.flag_LV = False
         self.flag_HV = False
 
-        power_management_status_id_bin = f'{CanClassIDs.CAN_CLASS_POWER_MANAGEMENT.value:0>4b}' \
-                                         f'{CanDeviceIDs.CAN_DEVICE_POWER_MANAGEMENT.value:0>4b}' \
+        power_management_status_id_bin = f'{CanClassIDs.POWER_MANAGEMENT.value:0>4b}' \
+                                         f'{CanDeviceIDs.POWER_MANAGEMENT.value:0>4b}' \
                                          f'{CanMessageTypeIDs.STATUS.value:0>3b}'
         self.power_management_status_id = int(power_management_status_id_bin, 2)
 
-        power_management_measurement_id_bin = f'{CanClassIDs.CAN_CLASS_POWER_MANAGEMENT.value:0>4b}' \
-                                              f'{CanDeviceIDs.CAN_DEVICE_POWER_MANAGEMENT.value:0>4b}' \
+        power_management_measurement_id_bin = f'{CanClassIDs.POWER_MANAGEMENT.value:0>4b}' \
+                                              f'{CanDeviceIDs.POWER_MANAGEMENT.value:0>4b}' \
                                               f'{CanMessageTypeIDs.MEASUREMENT.value:0>3b}'
         self.power_management_measurement_id = int(power_management_measurement_id_bin, 2)
 

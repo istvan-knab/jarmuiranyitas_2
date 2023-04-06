@@ -1,10 +1,10 @@
 import can
 from can import Message
 
-from jarmuiranyitas_2.can.ids.can_class_ids import CanClassIDs
-from jarmuiranyitas_2.can.ids.can_device_ids import CanDeviceIDs
-from jarmuiranyitas_2.can.ids.can_message_type_ids import CanMessageTypeIDs
-from jarmuiranyitas_2.can.ids.can_servo_message_ids import CanServoMessageIDs
+from jarmuiranyitas_2.can_dir.ids.can_class_ids import CanClassIDs
+from jarmuiranyitas_2.can_dir.ids.can_device_ids import CanDeviceIDs
+from jarmuiranyitas_2.can_dir.ids.can_message_type_ids import CanMessageTypeIDs
+from jarmuiranyitas_2.can_dir.ids.can_servo_message_ids import CanServoMessageIDs
 
 
 class ServoListener(can.Listener):
@@ -14,18 +14,18 @@ class ServoListener(can.Listener):
 
         self.flag_dss = False
 
-        servo_measurement_id_bin = f'{CanClassIDs.CAN_CLASS_SERVO.value:0>4b}' \
-                                   f'{CanDeviceIDs.CAN_DEVICE_SERVO.value:0>4b}' \
+        servo_measurement_id_bin = f'{CanClassIDs.SERVO.value:0>4b}' \
+                                   f'{CanDeviceIDs.SERVO.value:0>4b}' \
                                    f'{CanMessageTypeIDs.MEASUREMENT.value:0>3b}'
         self.servo_measurement_id = int(servo_measurement_id_bin, 2)
 
-        servo_response_id_bin = f'{CanClassIDs.CAN_CLASS_SERVO.value:0>4b}' \
-                                f'{CanDeviceIDs.CAN_DEVICE_SERVO.value:0>4b}' \
+        servo_response_id_bin = f'{CanClassIDs.SERVO.value:0>4b}' \
+                                f'{CanDeviceIDs.SERVO.value:0>4b}' \
                                 f'{CanMessageTypeIDs.RESPONSE.value:0>3b}'
         self.servo_response_id = int(servo_response_id_bin, 2)
 
-        servo_status_id_bin = f'{CanClassIDs.CAN_CLASS_SERVO.value:0>4b}' \
-                              f'{CanDeviceIDs.CAN_DEVICE_SERVO.value:0>4b}' \
+        servo_status_id_bin = f'{CanClassIDs.SERVO.value:0>4b}' \
+                              f'{CanDeviceIDs.SERVO.value:0>4b}' \
                               f'{CanMessageTypeIDs.STATUS.value:0>3b}'
         self.servo_status_id = int(servo_status_id_bin, 2)
 

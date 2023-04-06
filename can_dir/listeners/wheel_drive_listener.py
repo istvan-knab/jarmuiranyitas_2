@@ -1,10 +1,10 @@
 from can import Message
 
-from jarmuiranyitas_2.can.listeners.listener import Listener
-from jarmuiranyitas_2.can.ids.can_class_ids import CanClassIDs
-from jarmuiranyitas_2.can.ids.can_device_ids import CanDeviceIDs
-from jarmuiranyitas_2.can.ids.can_message_type_ids import CanMessageTypeIDs
-from jarmuiranyitas_2.can.ids.can_wheel_drive_message_ids import CanWheelDriveMessageIDs
+from jarmuiranyitas_2.can_dir.listeners.listener import Listener
+from jarmuiranyitas_2.can_dir.ids.can_class_ids import CanClassIDs
+from jarmuiranyitas_2.can_dir.ids.can_device_ids import CanDeviceIDs
+from jarmuiranyitas_2.can_dir.ids.can_message_type_ids import CanMessageTypeIDs
+from jarmuiranyitas_2.can_dir.ids.can_wheel_drive_message_ids import CanWheelDriveMessageIDs
 
 
 class WheelDriveListener(Listener):
@@ -22,43 +22,43 @@ class WheelDriveListener(Listener):
         self.measurement_RL = self.MEASUREMENT_WHEEL_DRIVE
         self.measurement_RR = self.MEASUREMENT_WHEEL_DRIVE
 
-        wheel_drive_fr_response_id_bin = f'{CanClassIDs.CAN_CLASS_WHEEL_DRIVE.value:0>4b}' \
-                                         f'{CanDeviceIDs.CAN_DEVICE_WHEEL_DRIVE_FR.value:0>4b}' \
+        wheel_drive_fr_response_id_bin = f'{CanClassIDs.WHEEL_DRIVE.value:0>4b}' \
+                                         f'{CanDeviceIDs.WHEEL_DRIVE_FR.value:0>4b}' \
                                          f'{CanMessageTypeIDs.RESPONSE.value:0>3b}'
         self.wheel_drive_FR_response_id = int(wheel_drive_fr_response_id_bin, 2)
 
-        wheel_drive_fl_response_id_bin = f'{CanClassIDs.CAN_CLASS_WHEEL_DRIVE.value:0>4b}' \
-                                         f'{CanDeviceIDs.CAN_DEVICE_WHEEL_DRIVE_FL.value:0>4b}' \
+        wheel_drive_fl_response_id_bin = f'{CanClassIDs.WHEEL_DRIVE.value:0>4b}' \
+                                         f'{CanDeviceIDs.WHEEL_DRIVE_FL.value:0>4b}' \
                                          f'{CanMessageTypeIDs.RESPONSE.value:0>3b}'
         self.wheel_drive_FL_response_id = int(wheel_drive_fl_response_id_bin, 2)
 
-        wheel_drive_rr_response_id_bin = f'{CanClassIDs.CAN_CLASS_WHEEL_DRIVE.value:0>4b}' \
-                                         f'{CanDeviceIDs.CAN_DEVICE_WHEEL_DRIVE_RR.value:0>4b}' \
+        wheel_drive_rr_response_id_bin = f'{CanClassIDs.WHEEL_DRIVE.value:0>4b}' \
+                                         f'{CanDeviceIDs.WHEEL_DRIVE_RR.value:0>4b}' \
                                          f'{CanMessageTypeIDs.RESPONSE.value:0>3b}'
         self.wheel_drive_RR_response_id = int(wheel_drive_rr_response_id_bin, 2)
 
-        wheel_drive_rl_response_id_bin = f'{CanClassIDs.CAN_CLASS_WHEEL_DRIVE.value:0>4b}' \
-                                         f'{CanDeviceIDs.CAN_DEVICE_WHEEL_DRIVE_RL.value:0>4b}' \
+        wheel_drive_rl_response_id_bin = f'{CanClassIDs.WHEEL_DRIVE.value:0>4b}' \
+                                         f'{CanDeviceIDs.WHEEL_DRIVE_RL.value:0>4b}' \
                                          f'{CanMessageTypeIDs.RESPONSE.value:0>3b}'
         self.wheel_drive_RL_response_id = int(wheel_drive_rl_response_id_bin, 2)
 
-        wheel_drive_fr_measurement_id_bin = f'{CanClassIDs.CAN_CLASS_WHEEL_DRIVE.value:0>4b}' \
-                                            f'{CanDeviceIDs.CAN_DEVICE_WHEEL_DRIVE_FR.value:0>4b}' \
+        wheel_drive_fr_measurement_id_bin = f'{CanClassIDs.WHEEL_DRIVE.value:0>4b}' \
+                                            f'{CanDeviceIDs.WHEEL_DRIVE_FR.value:0>4b}' \
                                             f'{CanMessageTypeIDs.MEASUREMENT.value:0>3b}'
         self.wheel_drive_FR_measurement_id = int(wheel_drive_fr_measurement_id_bin, 2)
 
-        wheel_drive_fl_measurement_id_bin = f'{CanClassIDs.CAN_CLASS_WHEEL_DRIVE.value:0>4b}' \
-                                            f'{CanDeviceIDs.CAN_DEVICE_WHEEL_DRIVE_FL.value:0>4b}' \
+        wheel_drive_fl_measurement_id_bin = f'{CanClassIDs.WHEEL_DRIVE.value:0>4b}' \
+                                            f'{CanDeviceIDs.WHEEL_DRIVE_FL.value:0>4b}' \
                                             f'{CanMessageTypeIDs.MEASUREMENT.value:0>3b}'
         self.wheel_drive_FL_measurement_id = int(wheel_drive_fl_measurement_id_bin, 2)
 
-        wheel_drive_rr_measurement_id_bin = f'{CanClassIDs.CAN_CLASS_WHEEL_DRIVE.value:0>4b}' \
-                                            f'{CanDeviceIDs.CAN_DEVICE_WHEEL_DRIVE_RR.value:0>4b}' \
+        wheel_drive_rr_measurement_id_bin = f'{CanClassIDs.WHEEL_DRIVE.value:0>4b}' \
+                                            f'{CanDeviceIDs.WHEEL_DRIVE_RR.value:0>4b}' \
                                             f'{CanMessageTypeIDs.MEASUREMENT.value:0>3b}'
         self.wheel_drive_RR_measurement_id = int(wheel_drive_rr_measurement_id_bin, 2)
 
-        wheel_drive_rl_measurement_id_bin = f'{CanClassIDs.CAN_CLASS_WHEEL_DRIVE.value:0>4b}' \
-                                            f'{CanDeviceIDs.CAN_DEVICE_WHEEL_DRIVE_RL.value:0>4b}' \
+        wheel_drive_rl_measurement_id_bin = f'{CanClassIDs.WHEEL_DRIVE.value:0>4b}' \
+                                            f'{CanDeviceIDs.WHEEL_DRIVE_RL.value:0>4b}' \
                                             f'{CanMessageTypeIDs.MEASUREMENT.value:0>3b}'
         self.wheel_drive_RL_measurement_id = int(wheel_drive_rl_measurement_id_bin, 2)
 
