@@ -12,14 +12,17 @@ from jarmuiranyitas_2.can_dir.enums.message_codes.can_power_management_message_i
 from jarmuiranyitas_2.can_dir.enums.message_codes.can_servo_message_ids import CanServoMessageIDs
 from jarmuiranyitas_2.can_dir.enums.message_codes.can_wheel_drive_message_ids import CanWheelDriveMessageIDs
 
+from jarmuiranyitas_2.controllers.torque_controller import Torque
+
 
 class StateHandler:
 
-    def __init__(self, can_network: CANNetwork, init_state: InternalStates):
+    def __init__(self, can_network: CANNetwork, init_state: InternalStates, controller: Torque):
         self.prev_state = init_state
         self.current_state = copy.deepcopy(self.prev_state)
 
         self.network = can_network
+        self.controller = controller
 
         self.flags = {"idl": False, "drv": False, "ref": False}
         self.update_flags()
@@ -297,25 +300,32 @@ class StateHandler:
         self.network.send_message(arbitration_id=self.ids["cmd_servo_id"], extended_id=False, data=cmd_discover_data)
 
     def send_reference(self):
-        ref_wd_fr_data = self.get_byte_array(self.reference["velocity"][0])
-        ref_wd_fl_data = self.get_byte_array(self.reference["velocity"][1])
-        ref_wd_rl_data = self.get_byte_array(self.reference["velocity"][2])
-        ref_wd_rr_data = self.get_byte_array(self.reference["velocity"][3])
-        ref_servo_data = self.get_servo_reference_msg(self.reference["steering_angle"])
+        while True:
+            self.network.sleep(duration_ms=100)
 
-        self.network.send_message(arbitration_id=self.ids["ref_wd_fr_id"], extended_id=False, data=ref_wd_fr_data)
-        self.network.send_message(arbitration_id=self.ids["ref_wd_fl_id"], extended_id=False, data=ref_wd_fl_data)
-        self.network.send_message(arbitration_id=self.ids["ref_wd_rl_id"], extended_id=False, data=ref_wd_rl_data)
-        self.network.send_message(arbitration_id=self.ids["ref_wd_rr_id"], extended_id=False, data=ref_wd_rr_data)
-        self.network.send_message(arbitration_id=self.ids["ref_servo_id"], extended_id=False, data=ref_servo_data)
-        self.network.sleep(duration_ms=100)
+            ref_wd_fr_data = self.get_wd_reference_msg(self.reference["current"][0], self.reference["velocity"][0])
+            ref_wd_fl_data = self.get_wd_reference_msg(self.reference["current"][1], self.reference["velocity"][1])
+            ref_wd_rl_data = self.get_wd_reference_msg(self.reference["current"][2], self.reference["velocity"][2])
+            ref_wd_rr_data = self.get_wd_reference_msg(self.reference["current"][3], self.reference["velocity"][3])
+            ref_servo_data = self.get_servo_reference_msg(self.reference["steering_angle"])
+
+            self.network.send_message(arbitration_id=self.ids["ref_wd_fr_id"], extended_id=False, data=ref_wd_fr_data)
+            self.network.send_message(arbitration_id=self.ids["ref_wd_fl_id"], extended_id=False, data=ref_wd_fl_data)
+            self.network.send_message(arbitration_id=self.ids["ref_wd_rl_id"], extended_id=False, data=ref_wd_rl_data)
+            self.network.send_message(arbitration_id=self.ids["ref_wd_rr_id"], extended_id=False, data=ref_wd_rr_data)
+            self.network.send_message(arbitration_id=self.ids["ref_servo_id"], extended_id=False, data=ref_servo_data)
 
     @staticmethod
-    def get_byte_array(data: float):
-        data_byte_array = bytearray(struct.pack("<f", data))
-        data_list = [data_byte_array[i] for i in range(4)]
+    def get_wd_reference_msg(current: float, velocity: float):
+        current_limit = 0
+        velocity_limit = 100
+        data_byte_array_1 = bytearray(struct.pack("<f", current_limit * current))
+        data_byte_array_2 = bytearray(struct.pack("<f", velocity_limit * velocity))
+        data_list_1 = [data_byte_array_1[i] for i in range(4)]
+        data_list_2 = [data_byte_array_2[i] for i in range(4)]
+        data_list_1.extend(data_list_2)
 
-        return data_list
+        return data_list_1
 
     @staticmethod
     def get_servo_reference_msg(value: float):
