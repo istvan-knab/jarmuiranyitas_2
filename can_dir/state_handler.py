@@ -60,8 +60,10 @@ class StateHandler:
         self.network.sleep(duration_ms=100)
 
         if self.flags["lv"] and self.flags["hv"]:
+            self.prev_state = self.current_state
             self.current_state = InternalStates.START2
         else:
+            self.prev_state = self.current_state
             self.current_state = InternalStates.ERR
             print("Battery is critical/dead")
 
@@ -75,9 +77,11 @@ class StateHandler:
         self.update_flags()
 
         if self.flags["dss"] and self.flags["dw1"] and self.flags["dw2"] and self.flags["dw3"] and self.flags["dw4"]:
+            self.prev_state = self.current_state
             self.current_state = InternalStates.START3
 
         else:
+            self.prev_state = self.current_state
             self.current_state = InternalStates.ERR
             print("Discovery of unit(s) failed")
 
@@ -102,6 +106,7 @@ class StateHandler:
         self.network.send_message(arbitration_id=self.ids["cfg_wd_rl_id"], extended_id=False,
                                   data=cfg_wd_control_velocity_data)
 
+        self.prev_state = self.current_state
         self.current_state = InternalStates.IDLE
         self.flags["idl"] = True
 
