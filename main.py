@@ -1,6 +1,6 @@
 import os
 import sys
-from multiprocessing import Process
+from threading import Thread
 
 PROJECT_DIR = os.path.dirname(os.path.abspath("main.py"))
 sys.path.append(os.path.dirname(PROJECT_DIR))
@@ -13,14 +13,13 @@ def main():
     can = CAN()
     udp = UDPReceiver()
 
-    can_comm = Process(target=can.start_communication)
-    udp_listener = Process(target=udp.receive)
+    can_comm = Thread(target=can.start_communication)
+    udp_listener = Thread(target=udp.receive)
+    cross_comm = Thread(target=can.set_ref_vals, args=[udp.last_data])
 
     can_comm.start()
     udp_listener.start()
-
-    while True:
-        can.set_ref_vals(udp.last_data)
+    cross_comm.start()
 
 
 if __name__ == "__main__":
