@@ -59,7 +59,6 @@ MEASURMENT `0x03` &emsp; &emsp; &emsp;&emsp;&ensp; MESSAGE TYPE EXTENSION `0x07`
 > Power Management Measurments
 - Message type : `0x03`
 - DLC : 8
-
 |  Byte offset  |    Message     |     Data    |     Format   |
 | ------------- | -------------  |-------------|--------------|
 |      0        |   VbatLV       |      -      |      U16     |
