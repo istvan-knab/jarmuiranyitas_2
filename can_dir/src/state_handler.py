@@ -314,8 +314,10 @@ class StateHandler:
 
     @staticmethod
     def get_wd_reference_msg(current: float, velocity: float):
-        data_byte_array_1 = bytearray(struct.pack("<f", current))
-        data_byte_array_2 = bytearray(struct.pack("<f", velocity))
+        current_limit = 0
+        velocity_limit = 100
+        data_byte_array_1 = bytearray(struct.pack("<f", current_limit * current))
+        data_byte_array_2 = bytearray(struct.pack("<f", velocity_limit * velocity))
         data_list_1 = [data_byte_array_1[i] for i in range(4)]
         data_list_2 = [data_byte_array_2[i] for i in range(4)]
         data_list_1.extend(data_list_2)
