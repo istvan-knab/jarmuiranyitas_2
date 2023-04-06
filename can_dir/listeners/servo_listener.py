@@ -1,9 +1,9 @@
 import can
 from can import Message
 
-from jarmuiranyitas_2.can_dir.enums.can_class_ids import CanClassIDs
-from jarmuiranyitas_2.can_dir.enums.can_device_ids import CanDeviceIDs
-from jarmuiranyitas_2.can_dir.enums.can_message_type_ids import CanMessageTypeIDs
+from jarmuiranyitas_2.can_dir.enums.arbitration_ids.can_class_ids import CanClassIDs
+from jarmuiranyitas_2.can_dir.enums.arbitration_ids.can_device_ids import CanDeviceIDs
+from jarmuiranyitas_2.can_dir.enums.arbitration_ids.can_message_type_ids import CanMessageTypeIDs
 from jarmuiranyitas_2.can_dir.enums.can_servo_message_ids import CanServoMessageIDs
 
 

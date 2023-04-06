@@ -4,9 +4,9 @@ import struct
 from jarmuiranyitas_2.can_dir.network import CANNetwork
 from jarmuiranyitas_2.can_dir.enums.internal_states import InternalStates
 
-from jarmuiranyitas_2.can_dir.enums.can_class_ids import CanClassIDs
-from jarmuiranyitas_2.can_dir.enums.can_device_ids import CanDeviceIDs
-from jarmuiranyitas_2.can_dir.enums.can_message_type_ids import CanMessageTypeIDs
+from jarmuiranyitas_2.can_dir.enums.arbitration_ids.can_class_ids import CanClassIDs
+from jarmuiranyitas_2.can_dir.enums.arbitration_ids.can_device_ids import CanDeviceIDs
+from jarmuiranyitas_2.can_dir.enums.arbitration_ids.can_message_type_ids import CanMessageTypeIDs
 
 from jarmuiranyitas_2.can_dir.enums.can_power_management_message_ids import CanPowerManagementMessageIDs
 from jarmuiranyitas_2.can_dir.enums.can_servo_message_ids import CanServoMessageIDs
