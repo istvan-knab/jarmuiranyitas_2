@@ -139,7 +139,9 @@ class StateHandler:
 
         ####
         self.flags["drv"] = True
+        self.prev_state = self.current_state
         self.current_state = InternalStates.DRIVE
+        self.network.sleep(duration_ms=1000)
         ####
 
         return self.current_state
