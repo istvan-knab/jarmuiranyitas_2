@@ -103,6 +103,12 @@ class StateHandler:
 
     def handle_idle(self):
         if self.flags["idl"]:
+            cmd_vsrv_on_data = [CanPowerManagementMessageIDs.VSRV.value, CanPowerManagementMessageIDs.ON.value]
+            self.network.send_message(arbitration_id=self.ids["cmd_pm_id"], extended_id=False, data=cmd_vsrv_on_data)
+            self.network.sleep(duration_ms=1000)
+            cmd_hvdc_on_data = [CanPowerManagementMessageIDs.HVDC.value, CanPowerManagementMessageIDs.ON.value]
+            self.network.send_message(arbitration_id=self.ids["cmd_pm_id"], extended_id=False, data=cmd_hvdc_on_data)
+
             cmd_wd_mode_drive_data = [CanWheelDriveMessageIDs.MODE.value, 0, CanWheelDriveMessageIDs.DRIVE.value, 0]
             self.network.send_message(arbitration_id=self.ids["cmd_wd_fr_id"], extended_id=False,
                                       data=cmd_wd_mode_drive_data)
@@ -141,14 +147,6 @@ class StateHandler:
     def handle_drive(self):
         if self.flags["drv"]:
             self.flags["ref"] = True
-
-            cmd_vsrv_on_data = [CanPowerManagementMessageIDs.VSRV.value, CanPowerManagementMessageIDs.ON.value]
-            self.network.send_message(arbitration_id=self.ids["cmd_pm_id"], extended_id=False, data=cmd_vsrv_on_data)
-            self.network.sleep(duration_ms=1500)
-
-            cmd_hvdc_on_data = [CanPowerManagementMessageIDs.HVDC.value, CanPowerManagementMessageIDs.ON.value]
-            self.network.send_message(arbitration_id=self.ids["cmd_pm_id"], extended_id=False, data=cmd_hvdc_on_data)
-            self.network.sleep(duration_ms=1500)
 
             cmd_wd_mode_drive_data = [CanWheelDriveMessageIDs.MODE.value, 0, CanWheelDriveMessageIDs.DRIVE.value, 0]
             self.network.send_message(arbitration_id=self.ids["cmd_wd_fr_id"], extended_id=False,
