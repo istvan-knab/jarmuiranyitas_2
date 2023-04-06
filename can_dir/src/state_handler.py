@@ -12,14 +12,17 @@ from jarmuiranyitas_2.can_dir.enums.message_codes.can_power_management_message_i
 from jarmuiranyitas_2.can_dir.enums.message_codes.can_servo_message_ids import CanServoMessageIDs
 from jarmuiranyitas_2.can_dir.enums.message_codes.can_wheel_drive_message_ids import CanWheelDriveMessageIDs
 
+from jarmuiranyitas_2.controllers.torque_controller import Torque
+
 
 class StateHandler:
 
-    def __init__(self, can_network: CANNetwork, init_state: InternalStates):
+    def __init__(self, can_network: CANNetwork, init_state: InternalStates, controller: Torque):
         self.prev_state = init_state
         self.current_state = copy.deepcopy(self.prev_state)
 
         self.network = can_network
+        self.controller = controller
 
         self.flags = {"idl": False, "drv": False, "ref": False}
         self.update_flags()
