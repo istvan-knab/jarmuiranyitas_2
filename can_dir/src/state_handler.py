@@ -1,7 +1,7 @@
 import copy
 import struct
 
-from jarmuiranyitas_2.can_dir.network import CANNetwork
+from jarmuiranyitas_2.can_dir.src.network import CANNetwork
 from jarmuiranyitas_2.can_dir.enums.internal_states import InternalStates
 
 from jarmuiranyitas_2.can_dir.enums.arbitration_ids.can_class_ids import CanClassIDs
