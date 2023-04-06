@@ -1,6 +1,6 @@
 from jarmuiranyitas_2.can_dir.config import Config
 from jarmuiranyitas_2.can_dir.network import CANNetwork
-from jarmuiranyitas_2.can_dir.internal_states import InternalStates
+from jarmuiranyitas_2.can_dir.enums.internal_states import InternalStates
 from jarmuiranyitas_2.can_dir.state_handler import StateHandler
 
 
