@@ -36,5 +36,9 @@ class CAN:
             elif self.current_state == InternalStates.ERR:
                 self.current_state = self.state_handler.handle_err()
 
+            self.state_handler.check()
+
     def set_ref_vals(self, ref_vals):
-        self.state_handler.set_ref_vals(ref_vals)
+        while True:
+            self.state_handler.set_ref_vals(ref_vals)
+            self.network.sleep(duration_ms=100)
