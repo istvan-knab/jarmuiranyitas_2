@@ -7,6 +7,7 @@ class Torque:
         self.torque_mid = 0.0
         self.wheel_torque = np.zeros(4)
         self.steering_angle = 0.0
+        self.input_gain = 0.1
         self.wheels = ("front_right", "front_left", "rear_right", "rear_left")
         print(self.wheel_torque)
 
@@ -19,7 +20,7 @@ class Torque:
 
     def distribution(self, torque_mid: float, steering_angle: float) -> np.array:
         self.torque_mid = torque_mid
-        self.steering_angle = steering_angle / 10
+        self.steering_angle = steering_angle * self.input_gain
         for wheel in range(len(self.wheels)):
             self.wheel_torque[wheel] = self.calculate_torque(wheel=self.wheels[wheel])
 
