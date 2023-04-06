@@ -5,7 +5,7 @@ class Torque:
 
     def __init__(self):
         self.torque_mid = 0.0
-        self.wheel_torque = np.zeros(4)
+        self.output_signal = np.zeros(4)
         self.steering_signal = 0.0
         self.pedal_gain = 1
         self.input_angle_gain = 0.1
@@ -23,9 +23,9 @@ class Torque:
         self.input_signal = input_signal * self.pedal_gain
         self.steering_signal = steering_signal * self.input_angle_gain
         for wheel in range(len(self.wheels)):
-            self.wheel_torque[wheel] = self.calculate_torque(wheel=self.wheels[wheel])
+            self.output_signal[wheel] = self.calculate_torque(wheel=self.wheels[wheel])
 
-        return self.wheel_torque
+        return self.output_signal
 
 
     def calculate_torque(self, wheel: str):
