@@ -1,8 +1,10 @@
 import pygame
 import g27
 import socket
+from udp.IPv6_udp_transmitter import UDPTransmitter
 
 pygame.init()
+udp = UDPTransmitter()
 
 # define some colors
 BLACK = (0, 0, 0)
@@ -34,6 +36,10 @@ done = False
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
+last_data = {"steering_angle": 0.0,
+             "current": [0.0, 0.0, 0.0, 0.0],
+             "velocity": [0.0, 0.0, 0.0, 0.0]}
+
 while not done:
     # event handling
     for event in pygame.event.get():
@@ -53,7 +59,13 @@ while not done:
     msgX = bytes([126 + int(steerPos * 126)])
     msgY = bytes([126 + int(throtPos * 126)])
     msgZ = bytes([126 + int(breakPos * 126)])
-    sock.sendto(msgX + msgY + msgZ, ("127.0.0.1", 5005))
+
+    last_data["steering_angle"] = steerPos # [-1,1]
+    throt = 1 - ((throtPos + 1) / 2)
+    last_data["velocity"] = [throt, throt, throt, throt] # [0,1]
+
+    udp.transmit(last_data)
+
 
     ball1_radius = int((steerPos + 1) * 20)
     ball2_radius = int((clutchPos + 1) * 20)
