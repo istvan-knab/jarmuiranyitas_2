@@ -1,16 +1,16 @@
 import copy
 import struct
 
-from jarmuiranyitas_2.can_dir.network import CANNetwork
-from jarmuiranyitas_2.can_dir.internal_states import InternalStates
+from jarmuiranyitas_2.can_dir.src.network import CANNetwork
+from jarmuiranyitas_2.can_dir.enums.internal_states import InternalStates
 
-from jarmuiranyitas_2.can_dir.ids.can_class_ids import CanClassIDs
-from jarmuiranyitas_2.can_dir.ids.can_device_ids import CanDeviceIDs
-from jarmuiranyitas_2.can_dir.ids.can_message_type_ids import CanMessageTypeIDs
+from jarmuiranyitas_2.can_dir.enums.arbitration_ids.can_class_ids import CanClassIDs
+from jarmuiranyitas_2.can_dir.enums.arbitration_ids.can_device_ids import CanDeviceIDs
+from jarmuiranyitas_2.can_dir.enums.arbitration_ids.can_message_type_ids import CanMessageTypeIDs
 
-from jarmuiranyitas_2.can_dir.ids.can_power_management_message_ids import CanPowerManagementMessageIDs
-from jarmuiranyitas_2.can_dir.ids.can_servo_message_ids import CanServoMessageIDs
-from jarmuiranyitas_2.can_dir.ids.can_wheel_drive_message_ids import CanWheelDriveMessageIDs
+from jarmuiranyitas_2.can_dir.enums.message_codes.can_power_management_message_ids import CanPowerManagementMessageIDs
+from jarmuiranyitas_2.can_dir.enums.message_codes.can_servo_message_ids import CanServoMessageIDs
+from jarmuiranyitas_2.can_dir.enums.message_codes.can_wheel_drive_message_ids import CanWheelDriveMessageIDs
 
 
 class StateHandler:

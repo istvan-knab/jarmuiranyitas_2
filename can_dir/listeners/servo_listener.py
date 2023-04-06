@@ -1,10 +1,10 @@
 import can
 from can import Message
 
-from jarmuiranyitas_2.can_dir.ids.can_class_ids import CanClassIDs
-from jarmuiranyitas_2.can_dir.ids.can_device_ids import CanDeviceIDs
-from jarmuiranyitas_2.can_dir.ids.can_message_type_ids import CanMessageTypeIDs
-from jarmuiranyitas_2.can_dir.ids.can_servo_message_ids import CanServoMessageIDs
+from jarmuiranyitas_2.can_dir.enums.arbitration_ids.can_class_ids import CanClassIDs
+from jarmuiranyitas_2.can_dir.enums.arbitration_ids.can_device_ids import CanDeviceIDs
+from jarmuiranyitas_2.can_dir.enums.arbitration_ids.can_message_type_ids import CanMessageTypeIDs
+from jarmuiranyitas_2.can_dir.enums.message_codes.can_servo_message_ids import CanServoMessageIDs
 
 
 class ServoListener(can.Listener):
