@@ -143,7 +143,7 @@ class StateHandler:
 
             self.reference["velocity"] = [0.0, 0.0, 0.0, 0.0]
             self.reference["current"] = [0.0, 0.0, 0.0, 0.0]
-            self.reference["steering_angle"] = 0
+            self.reference["steering_angle"] = 0.0
             self.flags["ref"] = False
 
         self.flags["idl"] = False
