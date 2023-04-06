@@ -2,9 +2,9 @@
 
 <img align="right" width="325" height="75" src="https://github.com/istvan-knab/jarmuiranyitas_2/blob/main/Old%20Documentation/Pictures/sztaki_logo_kek.png">
 
-* Pelenczei Bálint
-* Knáb István Gellért
-* Máté Kristóf
+`Pelenczei Bálint` </br>
+`Knáb István Gellért`</br>
+`Máté Kristóf`
 
 
 
