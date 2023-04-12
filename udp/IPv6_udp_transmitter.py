@@ -1,7 +1,5 @@
 import socket
-from time import sleep
 import json
-from pprint import pprint
 
 
 class UDPTransmitter:
@@ -12,8 +10,5 @@ class UDPTransmitter:
         self.sock = socket.socket(socket.AF_INET6, socket.SOCK_DGRAM)
 
     def transmit(self, data_dict: dict):
-        # while True:
         data_encoded = json.dumps(data_dict).encode('utf-8')
         self.sock.sendto(data_encoded, (self.udp_ip, self.udp_port))
-        pprint(data_dict)
-            # sleep(0.1)
