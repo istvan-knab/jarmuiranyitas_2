@@ -27,14 +27,12 @@ class Torque:
 
         return self.wheel_torque
 
-
     def calculate_torque(self, wheel: str):
         """
         This function will be responsible to calculate the torques by giving
         velocity and wheel id as input
         return:torque
         """
-        # default value for debug
         if wheel == "front_right":
             torque = self.torque_mid * (1 + self.steering_angle)
         elif wheel == "front_left":
