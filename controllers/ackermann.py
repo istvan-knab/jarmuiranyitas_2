@@ -22,14 +22,14 @@ class Ackermann(Controller):
         self.rpm_vector = {}
 
     def control(self, input_vector: dict):
-        self.steering_angle = input_vector["steering_angle"]
+        self.steering_angle = np.interp(input_vector["steering_angle"], (-1, 1), (np.deg2rad(-16), np.deg2rad(16)))
         self.velocity = input_vector["velocity"]
 
         if self.steering_angle > 0:
             self.alpha = -0.00001542 * (self.steering_angle ** 3) - 0.0001613 * (self.steering_angle ** 2) + \
                          0.4268 * self.steering_angle - 0.03554
-            self.beta = np.arctan(self.wheelbase / ((1 / self.steering_angle) / (self.inner_wheel_track / 2)))
-            self.turning_radius = (self.wheelbase / np.tan(self.alpha)) - (self.inner_wheel_track / 2)
+            self.beta = np.arctan(self.wheelbase / ((1 / self.steering_angle) - (self.inner_wheel_track / 2)))
+            self.turning_radius = self.wheelbase / np.tan(self.alpha) - (self.inner_wheel_track / 2)
 
             self.radius_vector["FR"] = (self.turning_radius - self.axle_track / 2) / np.cos(self.beta)
             self.radius_vector["FL"] = (self.turning_radius + self.axle_track / 2) / np.cos(self.alpha)
@@ -42,9 +42,9 @@ class Ackermann(Controller):
             self.velocity_vector["RL"] = self.velocity / self.turning_radius * self.radius_vector["RL"]
 
         elif self.steering_angle < 0:
-            self.alpha = np.arctan(self.wheelbase / ((1 / abs(self.steering_angle)) / (self.inner_wheel_track / 2)))
-            self.beta = -0.00001542 * (abs(self.steering_angle) ** 3) - 0.0001613 * (abs(self.steering_angle) ** 2) + \
-                        0.4268 * abs(self.steering_angle) - 0.03554
+            self.alpha = -np.arctan(self.wheelbase / ((1 / abs(self.steering_angle)) / (self.inner_wheel_track / 2)))
+            self.beta = -(-0.00001542 * (abs(self.steering_angle) ** 3) - 0.0001613 * (abs(self.steering_angle) ** 2) +
+                          0.4268 * abs(self.steering_angle) - 0.03554)
             self.turning_radius = abs((self.wheelbase / np.tan(abs(self.beta))) - (self.inner_wheel_track / 2))
 
             self.radius_vector["FR"] = (self.turning_radius + self.axle_track / 2) / np.cos(self.beta)

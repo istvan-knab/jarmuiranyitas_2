@@ -301,11 +301,10 @@ class StateHandler:
         self.network.send_message(arbitration_id=self.ids["cmd_servo_id"], extended_id=False, data=cmd_discover_data)
 
     def send_reference(self):
-        input_vector = {"steering_angle": self.reference["steering_angle"],
-                        "velocity": 500}
         while True:
             self.network.sleep(duration_ms=100)
-
+            input_vector = {"steering_angle": self.reference["steering_angle"],
+                            "velocity": 1.0}
             rpm = self.controller.control(input_vector=input_vector)
 
             ref_wd_fr_data = self.get_wd_reference_msg(self.reference["current"][0], rpm["FR"])
@@ -322,10 +321,8 @@ class StateHandler:
 
     @staticmethod
     def get_wd_reference_msg(current: float, velocity: float):
-        current_limit = 0
-        velocity_limit = 100
-        data_byte_array_1 = bytearray(struct.pack("<f", current_limit * current))
-        data_byte_array_2 = bytearray(struct.pack("<f", velocity_limit * velocity))
+        data_byte_array_1 = bytearray(struct.pack("<f", current))
+        data_byte_array_2 = bytearray(struct.pack("<f", velocity))
         data_list_1 = [data_byte_array_1[i] for i in range(4)]
         data_list_2 = [data_byte_array_2[i] for i in range(4)]
         data_list_1.extend(data_list_2)
