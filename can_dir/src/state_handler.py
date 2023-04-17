@@ -13,11 +13,12 @@ from jarmuiranyitas_2.can_dir.enums.message_codes.can_servo_message_ids import C
 from jarmuiranyitas_2.can_dir.enums.message_codes.can_wheel_drive_message_ids import CanWheelDriveMessageIDs
 
 from jarmuiranyitas_2.controllers.torque_controller import Torque
+from jarmuiranyitas_2.controllers.ackermann import Ackermann
 
 
 class StateHandler:
 
-    def __init__(self, can_network: CANNetwork, init_state: InternalStates, controller: Torque):
+    def __init__(self, can_network: CANNetwork, init_state: InternalStates, controller):
         self.prev_state = init_state
         self.current_state = copy.deepcopy(self.prev_state)
 
@@ -300,18 +301,17 @@ class StateHandler:
         self.network.send_message(arbitration_id=self.ids["cmd_servo_id"], extended_id=False, data=cmd_discover_data)
 
     def send_reference(self):
+        input_vector = {"steering_angle": self.reference["steering_angle"],
+                        "velocity": 500}
         while True:
             self.network.sleep(duration_ms=100)
 
-            # ref_wd_fr_data = self.get_wd_reference_msg(self.reference["current"][0], self.reference["velocity"][0])
-            # ref_wd_fl_data = self.get_wd_reference_msg(self.reference["current"][1], self.reference["velocity"][1])
-            # ref_wd_rl_data = self.get_wd_reference_msg(self.reference["current"][2], self.reference["velocity"][2])
-            # ref_wd_rr_data = self.get_wd_reference_msg(self.reference["current"][3], self.reference["velocity"][3])
-            vel = self.controller.distribution(torque_mid=50, steering_angle=self.reference["steering_angle"])
-            ref_wd_fr_data = self.get_wd_reference_msg(self.reference["current"][0], vel[0])
-            ref_wd_fl_data = self.get_wd_reference_msg(self.reference["current"][1], vel[1])
-            ref_wd_rl_data = self.get_wd_reference_msg(self.reference["current"][2], vel[2])
-            ref_wd_rr_data = self.get_wd_reference_msg(self.reference["current"][3], vel[3])
+            rpm = self.controller.control(input_vector=input_vector)
+
+            ref_wd_fr_data = self.get_wd_reference_msg(self.reference["current"][0], rpm["FR"])
+            ref_wd_fl_data = self.get_wd_reference_msg(self.reference["current"][1], rpm["FL"])
+            ref_wd_rl_data = self.get_wd_reference_msg(self.reference["current"][2], rpm["RL"])
+            ref_wd_rr_data = self.get_wd_reference_msg(self.reference["current"][3], rpm["RR"])
             ref_servo_data = self.get_servo_reference_msg(self.reference["steering_angle"])
 
             self.network.send_message(arbitration_id=self.ids["ref_wd_fr_id"], extended_id=False, data=ref_wd_fr_data)
