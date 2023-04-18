@@ -1,3 +1,6 @@
+import math
+from control import TransferFunction
+import numpy as np
 from jarmuiranyitas_2.vehicle_models.model import Model
 
 
@@ -9,19 +12,31 @@ class KinematicBycicleModel(Model):
     """
     def __init__(self) -> None:
         self.x = float()
-        self.y = float()
-        self.yaw = float()
-        self.v = float()
-        self.omega = float()
-        self.steering_angle = float()
-    def update(self) -> tuple:
+        v = 0
+        self.L = 2 #has to be measured
+        self.s = TransferFunction.s
+        self.A = np.array([[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]])
+        self.b = np.array([[0],[0],[0],[0],[0]])
+        self.Y_s = math.pow(v,2)
+        
+    def update(self, u:float) -> tuple:
         """
         State space representation, giving back the values x,y,yaw and theta
         """
-        
-    def transfer_function(self):
+        state_array = self.A * self.x + self.b * u
+
+    def transfer_function(self,v: float):
         """
         Declaring the transfer function is necessary, because of giving the chance to the
         pid controller to tune our model
         """
-        pass
+        s = self.s
+        Y_s = math.pow(v, 2)
+        U_s = self.L * s * s
+        G_s =  Y_s/U_s
+        G = (s + 1) / (s ** 2 + 2 * s + 1)
+        print(G_s)
+        print(G)
+
+kbm = KinematicBycicleModel()
+kbm.transfer_function(9)
