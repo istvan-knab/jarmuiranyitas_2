@@ -18,7 +18,7 @@ class KinematicBycicleModel(Model):
         self.A = np.array([[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]])
         self.b = np.array([[0],[0],[0],[0],[0]])
         self.Y_s = math.pow(v,2)
-        
+
     def update(self, u:float) -> tuple:
         """
         State space representation, giving back the values x,y,yaw and theta
@@ -29,14 +29,16 @@ class KinematicBycicleModel(Model):
         """
         Declaring the transfer function is necessary, because of giving the chance to the
         pid controller to tune our model
+        the transfer function is described in document made by Baranyi Márk
+        return: Transfer function
         """
+
         s = self.s
         Y_s = math.pow(v, 2)
         U_s = self.L * s * s
         G_s =  Y_s/U_s
-        G = (s + 1) / (s ** 2 + 2 * s + 1)
-        print(G_s)
-        print(G)
+
+        return G_s
 
 kbm = KinematicBycicleModel()
 kbm.transfer_function(9)
