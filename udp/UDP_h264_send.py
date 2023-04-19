@@ -12,18 +12,20 @@ def main():
     init_params = sl.InitParameters()
     init_params.camera_resolution = sl.RESOLUTION.HD1080
     init_params.camera_fps = 30
-    init_params.depth_mode = sl.DEPTH_MODE.PERFORMANCE
+    init_params.depth_mode = sl.DEPTH_MODE.NONE
 
     # Open the camera
     err = zed.open(init_params)
     if err != sl.ERROR_CODE.SUCCESS:
-        print("Failed to open the camera")
-        return
+        print(repr(err))
+        exit(1)
 
     # Initialize the ZMQ socket
     context = zmq.Context()
     socket = context.socket(zmq.PUSH)
     socket.bind("udp://[fc94:776b:33a5:6f6a:337c:2e85:bc5e:da98]:5000") # Use IPv6 address and port number
+    # socket.bind("udp://[::]:5000") # Use IPv6 address and port number
+
 
     # Configure the video codec
     fourcc = cv2.VideoWriter_fourcc(*"H264")

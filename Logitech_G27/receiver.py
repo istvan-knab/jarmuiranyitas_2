@@ -22,7 +22,7 @@ def main():
 
     init.depth_mode = sl.DEPTH_MODE.PERFORMANCE
 
-    init.set_from_stream(orin_sztaki, 30000)
+    init.set_from_stream(kry_pc, 30000)
 
     cam = sl.Camera()
     status = cam.open(init)
