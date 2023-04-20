@@ -19,13 +19,13 @@ class Torque:
         # TODO: Call the torque listener
         pass
 
-    def distribution(self, torque_mid: float, steering_angle: float) -> np.array:
-        self.torque_mid = torque_mid * self.pedal_gain
-        self.steering_angle = steering_angle * self.input_angle_gain
+    def distribution(self, input_signal: float, steering_signal: float) -> np.array:
+        self.input_signal = input_signal * self.pedal_gain
+        self.steering_signal = steering_signal * self.input_angle_gain
         for wheel in range(len(self.wheels)):
-            self.wheel_torque[wheel] = self.calculate_torque(wheel=self.wheels[wheel])
+            self.output_signal[wheel] = self.calculate_torque(wheel=self.wheels[wheel])
 
-        return self.wheel_torque
+        return self.output_signal
 
     def calculate_torque(self, wheel: str):
         """
@@ -34,13 +34,13 @@ class Torque:
         return:torque
         """
         if wheel == "front_right":
-            torque = self.torque_mid * (1 + self.steering_angle)
+            reference_signal = self.input_signal * (1 + self.steering_signal)
         elif wheel == "front_left":
-            torque = self.torque_mid * (1 - self.steering_angle)
+            reference_signal = self.input_signal * (1 - self.steering_signal)
         elif wheel == "rear_right":
-            torque = self.torque_mid * (1 + self.steering_angle)
+            reference_signal = self.input_signal * (1 + self.steering_signal)
         elif wheel == "rear_left":
-            torque = self.torque_mid * (1 - self.steering_angle)
+            reference_signal = self.input_signal * (1 - self.steering_signal)
         else:
             raise Exception("Wrong input")
-        return torque
+        return reference_signal
