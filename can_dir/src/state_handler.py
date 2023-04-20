@@ -13,11 +13,12 @@ from jarmuiranyitas_2.can_dir.enums.message_codes.can_servo_message_ids import C
 from jarmuiranyitas_2.can_dir.enums.message_codes.can_wheel_drive_message_ids import CanWheelDriveMessageIDs
 
 from jarmuiranyitas_2.controllers.torque_controller import Torque
+from jarmuiranyitas_2.controllers.ackermann import Ackermann
 
 
 class StateHandler:
 
-    def __init__(self, can_network: CANNetwork, init_state: InternalStates, controller: Torque):
+    def __init__(self, can_network: CANNetwork, init_state: InternalStates, controller):
         self.prev_state = init_state
         self.current_state = copy.deepcopy(self.prev_state)
 
@@ -302,11 +303,14 @@ class StateHandler:
     def send_reference(self):
         while True:
             self.network.sleep(duration_ms=100)
+            input_vector = {"steering_angle": self.reference["steering_angle"],
+                            "velocity": 1.0}
+            rpm = self.controller.control(input_vector=input_vector)
 
-            ref_wd_fr_data = self.get_wd_reference_msg(self.reference["current"][0], self.reference["velocity"][0])
-            ref_wd_fl_data = self.get_wd_reference_msg(self.reference["current"][1], self.reference["velocity"][1])
-            ref_wd_rl_data = self.get_wd_reference_msg(self.reference["current"][2], self.reference["velocity"][2])
-            ref_wd_rr_data = self.get_wd_reference_msg(self.reference["current"][3], self.reference["velocity"][3])
+            ref_wd_fr_data = self.get_wd_reference_msg(self.reference["current"][0], rpm["FR"])
+            ref_wd_fl_data = self.get_wd_reference_msg(self.reference["current"][1], rpm["FL"])
+            ref_wd_rl_data = self.get_wd_reference_msg(self.reference["current"][2], rpm["RL"])
+            ref_wd_rr_data = self.get_wd_reference_msg(self.reference["current"][3], rpm["RR"])
             ref_servo_data = self.get_servo_reference_msg(self.reference["steering_angle"])
 
             self.network.send_message(arbitration_id=self.ids["ref_wd_fr_id"], extended_id=False, data=ref_wd_fr_data)
@@ -317,10 +321,8 @@ class StateHandler:
 
     @staticmethod
     def get_wd_reference_msg(current: float, velocity: float):
-        current_limit = 0
-        velocity_limit = 100
-        data_byte_array_1 = bytearray(struct.pack("<f", current_limit * current))
-        data_byte_array_2 = bytearray(struct.pack("<f", velocity_limit * velocity))
+        data_byte_array_1 = bytearray(struct.pack("<f", current))
+        data_byte_array_2 = bytearray(struct.pack("<f", velocity))
         data_list_1 = [data_byte_array_1[i] for i in range(4)]
         data_list_2 = [data_byte_array_2[i] for i in range(4)]
         data_list_1.extend(data_list_2)

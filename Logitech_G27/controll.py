@@ -1,7 +1,7 @@
 import pygame
 import g27
 import socket
-from udp.IPv6_udp_transmitter import UDPTransmitter
+from jarmuiranyitas_2.udp.IPv6_udp_transmitter import UDPTransmitter
 
 pygame.init()
 udp = UDPTransmitter()

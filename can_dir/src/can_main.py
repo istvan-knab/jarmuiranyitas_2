@@ -3,6 +3,7 @@ from jarmuiranyitas_2.can_dir.src.network import CANNetwork
 from jarmuiranyitas_2.can_dir.enums.internal_states import InternalStates
 from jarmuiranyitas_2.can_dir.src.state_handler import StateHandler
 from jarmuiranyitas_2.controllers.torque_controller import Torque
+from jarmuiranyitas_2.controllers.ackermann import Ackermann
 
 
 class CAN:
@@ -13,7 +14,7 @@ class CAN:
                                   channel=self.config.get_channel(),
                                   bitrate=self.config.get_bitrate(),
                                   receive_own_messages=self.config.get_receive_own_messages())
-        self.controller = Torque()
+        self.controller = Ackermann()
         self.state_handler = StateHandler(can_network=self.network,
                                           init_state=InternalStates.START1,
                                           controller=self.controller)

@@ -5,8 +5,8 @@ class Torque:
 
     def __init__(self):
         self.torque_mid = 0.0
-        self.output_signal = np.zeros(4)
-        self.steering_signal = 0.0
+        self.wheel_torque = np.zeros(4)
+        self.steering_angle = 0.0
         self.pedal_gain = 1
         self.input_angle_gain = 0.1
         self.wheels = ("front_right", "front_left", "rear_right", "rear_left")
@@ -27,14 +27,12 @@ class Torque:
 
         return self.output_signal
 
-
     def calculate_torque(self, wheel: str):
         """
         This function will be responsible to calculate the torques by giving
         velocity and wheel id as input
         return:torque
         """
-        # default value for debug
         if wheel == "front_right":
             reference_signal = self.input_signal * (1 + self.steering_signal)
         elif wheel == "front_left":
