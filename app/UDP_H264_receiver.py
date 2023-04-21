@@ -98,7 +98,7 @@ port = 9999
 message = b'Hello'
 
 client_socket.sendto(message,(host_ip,port))
-fps,st,frames_to_count,cnt = (0,0,20,0)
+fps,st,frames_to_count,cnt = (0, 0, 20, 0)
 while True:
 	packet,_ = client_socket.recvfrom(BUFF_SIZE)
 	data = base64.b64decode(packet,' /')
