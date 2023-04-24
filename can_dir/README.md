@@ -68,6 +68,27 @@ MEASURMENT `0x03` &emsp; &emsp; &emsp;&emsp;&ensp; MESSAGE TYPE EXTENSION `0x07`
 |      6        |   Im           |      -      |      I16     |
 
 ### Servo
+- Class ID :  `0x0D`
+- Device ID: `0x01`
+
+> Discover( Command )
+- Message type :  `0x00`
+- DLC : 2
+
+|  Byte offset  |    Message    |     Data    |     Format   |
+| ------------- | ------------- |-------------|--------------|
+|      0        |  CMD Discover |    0x90     |      U8      |
+
+> Mode( Command )
+- Message type :  `0x00`
+- DLC : 2
+
+|  Byte offset  |    Message     |     Data    |     Format   |
+| ------------- | -------------  |-------------|--------------|
+|      0        |   CMD Mode     |    0xBB     |      U8      |
+|      1        |   Mode Idle    |    0xB0     |      U8      |
+|      1        |   Mode Start   |    0x0B     |      U8      |
+ 
 ### Front Right Wheel
 ### Front Left Wheel
 ### Rear Right Wheel
