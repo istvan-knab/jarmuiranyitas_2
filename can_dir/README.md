@@ -107,6 +107,23 @@ MEASURMENT `0x03` &emsp; &emsp; &emsp;&emsp;&ensp; MESSAGE TYPE EXTENSION `0x07`
 |      1        |   SET_MIN_ANGLE  |    value     |      U16      |
 |      3        |   SET_MAX_ANGLE  |    value     |      U16     |
 
+
+> Angle( Reference)
+- Message type :  `0x02`
+- DLC : 2
+
+|  Byte offset  |    Message    |     Data    |     Format   |
+| ------------- | ------------- |-------------|--------------|
+|      0        |  Angle reference |    value    |      I16      |
+
+> Angle( Response)
+- Message type :  `0x01`
+- DLC : 1
+
+|  Byte offset  |    Message    |     Data    |     Format   |
+| ------------- | ------------- |-------------|--------------|
+|      0        |  Response ping|    0x6e    |      U8      |
+
  
 ### Front Right Wheel
 ### Front Left Wheel
