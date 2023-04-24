@@ -124,6 +124,27 @@ MEASURMENT `0x03` &emsp; &emsp; &emsp;&emsp;&ensp; MESSAGE TYPE EXTENSION `0x07`
 | ------------- | ------------- |-------------|--------------|
 |      0        |  Response ping|    0x6e    |      U8      |
 
+> Servo_status( Status)
+- Message type :  `0x04`
+- DLC : 1
+
+|  Byte offset  |    Message     |     Data    |     Format   |
+| ------------- | -------------  |-------------|--------------|
+|      0        |   VIR_OK    |    value    |      BIT0    |
+|      0        |   VIR_ERROR    |    value     |      BIT1    |
+|      0        |   CTRL_OK   |    value     |      BIT2    | 
+|      0        |   MEAS_OK   |    value     |      BIT3    |
+|      0        |   HARD_FAULT  |    value     |      BIT4    |
+
+> MEASUREMENT_SERVO( Measurement)
+- Message type :  `0x03`
+- DLC : 1
+
+|  Byte offset  |    Message     |     Data    |     Format   |
+| ------------- | -------------  |-------------|--------------|
+|      0        |   Angle_val    |    value    |      I16     | 
+|      0        |   VIR_val      |    value    |      I16     |
+|      0        |   rpm_val      |    value    |      I16     | 
  
 ### Front Right Wheel
 ### Front Left Wheel
