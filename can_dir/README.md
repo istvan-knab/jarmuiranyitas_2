@@ -116,7 +116,7 @@ MEASURMENT `0x03` &emsp; &emsp; &emsp;&emsp;&ensp; MESSAGE TYPE EXTENSION `0x07`
 | ------------- | ------------- |-------------|--------------|
 |      0        |  Angle reference |    value    |      I16      |
 
-> Angle( Response)
+> PING( Response)
 - Message type :  `0x01`
 - DLC : 1
 
