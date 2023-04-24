@@ -88,6 +88,25 @@ MEASURMENT `0x03` &emsp; &emsp; &emsp;&emsp;&ensp; MESSAGE TYPE EXTENSION `0x07`
 |      0        |   CMD Mode     |    0xBB     |      U8      |
 |      1        |   Mode Idle    |    0xB0     |      U8      |
 |      1        |   Mode Start   |    0x0B     |      U8      |
+
+> Nullpoint( Config )
+- Message type :  `0x05`
+- DLC : 5
+
+|  Byte offset  |    Message    |     Data    |     Format   |
+| ------------- | ------------- |-------------|--------------|
+|      0        |  Config Nullpoint |    0xCC    |      U8      |
+
+> Min-Max angle( Config )
+- Message type :  `0x05`
+- DLC : 5
+
+|  Byte offset  |    Message     |     Data    |     Format   |
+| ------------- | -------------  |-------------|--------------|
+|      0        |   Config Min-Max angle    |    0xDD     |      U8      |
+|      1        |   SET_MIN_ANGLE  |    value     |      U16      |
+|      3        |   SET_MAX_ANGLE  |    value     |      U16     |
+
  
 ### Front Right Wheel
 ### Front Left Wheel
