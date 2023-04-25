@@ -147,15 +147,15 @@ MEASURMENT `0x03` &emsp; &emsp; &emsp;&emsp;&ensp; MESSAGE TYPE EXTENSION `0x07`
 |      0        |   rpm_val      |    value    |      I16     | 
  
 ### Wheels
-- Front right
+ Front Right &emsp; &emsp; &emsp; &emsp;&ensp;&emsp;&emsp;   Front Left &emsp; &emsp; &emsp;&ensp;&emsp; &emsp; &emsp;   Rear Right &emsp; &emsp; &emsp;&ensp;&emsp; &emsp; &emsp;   Rear Left
 
- |  Class+Device      |     Data      |
- | -------------      |  -------------|
- |      Command       |          588  |
- |      Config        |         58D   |
- |      Reference     |         58A   |
- |     Response       |         589   |
- |      Measurement   |         58B   |
+ |  Class+Device      |     Data      |  Class+Device      |     Data      | Class+Device       |     Data      |  Class+Device      |     Data      |
+ | -------------      |  -------------|  -------------      |  -------------|-------------      |  -------------|  -------------     |  -------------|
+ |      Command       |          588  |      Command       |          588  |      Command       |          588  |      Command       |          588  |
+ |      Config        |         58D   |       Config        |         58D   |      Config       |         58D   |       Config       |         58D   |
+ |      Reference     |         58A   |      Reference     |         58A   |      Reference     |         58A   |      Reference     |         58A   |
+ |     Response       |         589   |     Response       |         589   |      Response      |         589   |     Response       |         589   | 
+ |      Measurement   |         58B   |      Measurement   |         58B   |      Measurement   |         58B   |      Measurement   |         58B   |
  
 - Front Left
 - Rear right
