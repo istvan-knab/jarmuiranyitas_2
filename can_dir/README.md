@@ -147,17 +147,15 @@ MEASURMENT `0x03` &emsp; &emsp; &emsp;&emsp;&ensp; MESSAGE TYPE EXTENSION `0x07`
 |      0        |   rpm_val      |    value    |      I16     | 
  
 ### Wheels
- Front Right &emsp; &emsp; &emsp; &emsp;&ensp;&emsp;&emsp;   Front Left &emsp; &emsp; &emsp;&ensp;&emsp; &emsp; &emsp;   Rear Right &emsp; &emsp; &emsp;&ensp;&emsp; &emsp; &emsp;   Rear Left
+ Front Right &emsp; &emsp; &emsp; &emsp;&ensp;&emsp;&emsp;   Front Left &emsp; &emsp; &emsp;&ensp;&emsp; &emsp; &emsp;   Rear Left &emsp; &emsp; &emsp;&ensp;&emsp; &emsp; &emsp;   Rear Right
 
  |  Class+Device      |     Data      |  Class+Device      |     Data      | Class+Device       |     Data      |  Class+Device      |     Data      |
  | -------------      |  -------------|  -------------      |  -------------|-------------      |  -------------|  -------------     |  -------------|
- |      Command       |          588  |      Command       |          588  |      Command       |          588  |      Command       |          588  |
- |      Config        |         58D   |       Config        |         58D   |      Config       |         58D   |       Config       |         58D   |
- |      Reference     |         58A   |      Reference     |         58A   |      Reference     |         58A   |      Reference     |         58A   |
- |     Response       |         589   |     Response       |         589   |      Response      |         589   |     Response       |         589   | 
- |      Measurement   |         58B   |      Measurement   |         58B   |      Measurement   |         58B   |      Measurement   |         58B   |
+ |      Command       |          588  |      Command       |          590  |      Command       |          598  |      Command       |          5A0  |
+ |      Config        |         58D   |       Config        |         595   |      Config       |         59D   |       Config       |         5A5   |
+ |      Reference     |         58A   |      Reference     |         592   |      Reference     |         59A   |      Reference     |         5A2   |
+ |     Response       |         589   |     Response       |         591   |      Response      |         599   |     Response       |         5A1   | 
+ |      Measurement   |         58B   |      Measurement   |         593   |      Measurement   |         59B   |      Measurement   |         5A3   |
  
-- Front Left
-- Rear right
-- Rear left
+
 
