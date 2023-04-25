@@ -148,6 +148,15 @@ MEASURMENT `0x03` &emsp; &emsp; &emsp;&emsp;&ensp; MESSAGE TYPE EXTENSION `0x07`
  
 ### Wheels
 - Front right
+
+ |  Class+Device      |     Data      |
+ | -------------      |  -------------|
+ |      Command       |          588  |
+ |      Config        |         58D   |
+ |      Reference     |         58A   |
+ |     Response       |         589   |
+ |      Measurement   |         58B   |
+ 
 - Front Left
 - Rear right
 - Rear left
