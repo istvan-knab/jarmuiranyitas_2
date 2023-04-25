@@ -146,7 +146,9 @@ MEASURMENT `0x03` &emsp; &emsp; &emsp;&emsp;&ensp; MESSAGE TYPE EXTENSION `0x07`
 |      0        |   VIR_val      |    value    |      I16     |
 |      0        |   rpm_val      |    value    |      I16     | 
  
-### Front Right Wheel
-### Front Left Wheel
-### Rear Right Wheel
-### Rear Left Wheel
+### Wheels
+- Front right
+- Front Left
+- Rear right
+- Rear left
+
