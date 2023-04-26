@@ -197,3 +197,21 @@ MEASURMENT `0x03` &emsp; &emsp; &emsp;&emsp;&ensp; MESSAGE TYPE EXTENSION `0x07`
 |      0        |CFG_CONTROL_MODE|    0x01     |      U16     |
 |      4        |  CONTROL_TORQUE|    0x01     |      U16     |
 |      4        |CONTROL_VELOCITY|    0x02     |      U16     |
+
+> Torque minimal value limit( Config )
+- Message type :  `0x05`
+- DLC : 8
+
+|  Byte offset  |    Message        |     Data    |     Format   |
+| ------------- | -------------     |-------------|--------------|
+|      0        |CFG_TRQUE_LIMIT_MIN|    0x02     |      U16     |
+|      4        |Minimum current limit|    value    |      F32     |
+
+> Torque maximal value limit( Config )
+- Message type :  `0x05`
+- DLC : 8
+
+|  Byte offset  |    Message            |     Data    |     Format   |
+| ------------- | -------------         |-------------|--------------|
+|      0        |CFG_TRQUE_LIMIT_MIN    |    0x03     |      U16     |
+|      4        |  Maximum current limit|    value    |      F32     |
