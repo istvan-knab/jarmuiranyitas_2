@@ -224,3 +224,33 @@ MEASURMENT `0x03` &emsp; &emsp; &emsp;&emsp;&ensp; MESSAGE TYPE EXTENSION `0x07`
 | ------------- | -------------         |-------------|--------------|
 |      0        |CFG_VELOCITY_LIMIT     |    0x04     |      U16     |
 |      4        |  velocity limit       |    value    |      F32     |
+
+> Torque/Velocity reference( Reference )
+- Message type :  `0x02`
+- DLC : 8
+
+
+|  Byte offset  |    Message            |     Data    |     Format   |
+| ------------- | -------------         |-------------|--------------|
+|      0        |  Current reference    |    value    |      F32     |
+|      4        |  Velocity reference   |    value    |      F32     |
+
+> Resposne to Discover command( Response )
+- Message type :  `0x01`
+- DLC : 2
+
+
+|  Byte offset  |    Message   |     Data    |     Format   |
+| ------------- | -------------|-------------|--------------|
+|      0        |  Device ID   |    value    |      U16     |
+
+> Drive measurements( Measurement )
+- Message type :  `0x03`
+- DLC : 8
+
+
+|  Byte offset  |    Message    |     Data    |     Format   |
+| ------------- | ------------- |-------------|--------------|
+|      0        |  Current      |    value    |      U16     |
+|      4        |  Velocity     |    value    |      U16     |
+
