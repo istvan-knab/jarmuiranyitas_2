@@ -158,4 +158,32 @@ MEASURMENT `0x03` &emsp; &emsp; &emsp;&emsp;&ensp; MESSAGE TYPE EXTENSION `0x07`
  |      Measurement   |         58B   |      Measurement   |         593   |      Measurement   |         59B   |      Measurement   |         5A3   |
  
 
+> Discover( Command )
+- Message type :  `0x00`
+- DLC : 2
 
+|  Byte offset  |    Message     |     Data    |     Format   |
+| ------------- | -------------  |-------------|--------------|
+|      0        |  CMD_DISCOVER  |    0x90     |      U16     | 
+
+
+> Mode( Command )
+- Message type :  `0x00`
+- DLC : 4
+
+|  Byte offset  |    Message     |     Data    |     Format   |
+| ------------- | -------------  |-------------|--------------|
+|      0        |   CMD Mode     |    0x10     |      U16     |
+|      2        |   Mode Idle    |    0x11     |      U16     |
+|      2        |   Mode Start   |    0x12     |      U16     |
+
+
+> Drive state( Command )
+- Message type :  `0x00`
+- DLC : 4
+
+|  Byte offset  |    Message     |     Data    |     Format   |
+| ------------- | -------------  |-------------|--------------|
+|      0        |CMD_Drive_state |    0x50     |      U16     |
+|      2        |   CMD_Stopped  |    0x00     |      U16     |
+|      2        |   CMD_Start    |    0x01     |      U16     |
