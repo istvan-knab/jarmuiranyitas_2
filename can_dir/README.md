@@ -187,3 +187,13 @@ MEASURMENT `0x03` &emsp; &emsp; &emsp;&emsp;&ensp; MESSAGE TYPE EXTENSION `0x07`
 |      0        |CMD_Drive_state |    0x50     |      U16     |
 |      2        |   CMD_Stopped  |    0x00     |      U16     |
 |      2        |   CMD_Start    |    0x01     |      U16     |
+
+> Control mode( Config )
+- Message type :  `0x05`
+- DLC : 8
+
+|  Byte offset  |    Message     |     Data    |     Format   |
+| ------------- | -------------  |-------------|--------------|
+|      0        |CFG_CONTROL_MODE|    0x01     |      U16     |
+|      4        |  CONTROL_TORQUE|    0x01     |      U16     |
+|      4        |CONTROL_VELOCITY|    0x02     |      U16     |
