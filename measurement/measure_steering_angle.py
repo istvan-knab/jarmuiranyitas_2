@@ -1,4 +1,5 @@
-import spidev
+import can
+from can import Message
 
 from jarmuiranyitas_2.measurement.measure import Measure
 
@@ -9,7 +10,7 @@ class MeasurAngle(Measure):
         self.yaw_rate = 0
         self.state = (self.velocity, self.steering_angle)
         self.state_dict = {self.state: self.yaw_rate}
-        spi = spidev.SpiDev()
+
 
     def update_state_dict(self) -> None:
         yaw = self.imu_measurement()
