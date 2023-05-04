@@ -25,3 +25,6 @@ class MeasurTorque(Measure):
 
     def input_signal(self):
         return self.velocity, self.distribution
+
+    def write_file(self)->None:
+        pass

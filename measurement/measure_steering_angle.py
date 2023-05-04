@@ -1,5 +1,6 @@
 import can
 from can import Message
+import pandas as pd
 
 from jarmuiranyitas_2.measurement.measure import Measure
 
@@ -13,6 +14,10 @@ class MeasurAngle(Measure):
 
 
     def update_state_dict(self) -> None:
+        """
+        This function is responsible for updating the measured values
+        state dict will be saved in the load csv function
+        """
         yaw = self.imu_measurement()
         velocity,steering = self.input_signal()
         self.state = (velocity, steering)
@@ -28,6 +33,12 @@ class MeasurAngle(Measure):
         steering= 3
         return velocity, steering
 
+    def write_file(self)->None:
+        df = pd.DataFrame.from_dict(self.state_dict)
+        df.to_csv(index = False)
+        print(df)
+
 
 m = MeasurAngle()
 m.update_state_dict()
+m.write_file()
