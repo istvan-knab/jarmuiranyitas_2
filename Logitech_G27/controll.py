@@ -62,7 +62,12 @@ while not done:
 
     last_data["steering_angle"] = steerPos # [-1,1]
     throt = 1 - ((throtPos + 1) / 2)
-    last_data["velocity"] = [throt, throt, throt, throt] # [0,1]
+    clucth = 1 - ((clutchPos + 1) / 2)
+    if throt >= 0.05:
+        last_data["velocity"] = [throt, throt, throt, throt] # [0,1]
+    else:
+        last_data["velocity"] = [-clucth, -clucth, -clucth, -clucth]  # [0,1]
+    print(last_data)
 
     udp.transmit(last_data)
 
