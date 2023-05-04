@@ -8,7 +8,7 @@ The vehicle will be modelled with the kinematic bycicle model, and by measuring 
 ## State space representation
 
 Instead of using the value of steering angle as input we have the torque distribution as influence in our model. The implementation of that model can't be realized yet, because some physical parameters are still unknown.
-<img align="left" width="349" height="102" src="https://github.com/istvan-knab/jarmuiranyitas_2/blob/main/Old%20Documentation/Pictures/byc_state.jpg"></br></br></br>
+<img align="left" width="349" height="102" src="https://github.com/istvan-knab/jarmuiranyitas_2/blob/main/Old%20Documentation/Pictures/byc_state.jpg"></br></br></br></br>
 
 ## Simple distributed torque controller
 ## PID Controller
