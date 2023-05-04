@@ -324,7 +324,7 @@ class StateHandler:
         while True:
             self.network.sleep(duration_ms=100)
             input_vector = {"steering_angle": self.reference["steering_angle"],
-                            "velocity": self.reference["velocity"]}
+                            "velocity": self.reference["velocity"][0] * 100}
             rpm = self.controller.control(input_vector=input_vector)
 
             ref_wd_fr_data = self.get_wd_reference_msg(self.reference["current"][0], rpm["FR"])
