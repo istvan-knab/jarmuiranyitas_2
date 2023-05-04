@@ -80,7 +80,8 @@ class StateHandler:
         self.network.sleep(duration_ms=1500)
         self.update_flags()
 
-        if self.flags["dss"] and self.flags["dw1"] and self.flags["dw2"] and self.flags["dw3"] and self.flags["dw4"]:
+        #  and self.flags["dw3"] and self.flags["dw4"]
+        if self.flags["dss"] and self.flags["dw1"] and self.flags["dw2"]:
             self.prev_state = self.current_state
             self.current_state = InternalStates.START3
 
@@ -110,6 +111,26 @@ class StateHandler:
         self.network.send_message(arbitration_id=self.ids["cfg_wd_rl_id"], extended_id=False,
                                   data=cfg_wd_control_velocity_data)
 
+        cfg_wd_torque_limit_max_data = [CanWheelDriveMessageIDs.TORQUE_LIMIT_MAX.value, 0, 0, 0, 0, 64, 28, 70]
+        self.network.send_message(arbitration_id=self.ids["cfg_wd_fr_id"], extended_id=False,
+                                  data=cfg_wd_torque_limit_max_data)
+        self.network.send_message(arbitration_id=self.ids["cfg_wd_fl_id"], extended_id=False,
+                                  data=cfg_wd_torque_limit_max_data)
+        self.network.send_message(arbitration_id=self.ids["cfg_wd_rr_id"], extended_id=False,
+                                  data=cfg_wd_torque_limit_max_data)
+        self.network.send_message(arbitration_id=self.ids["cfg_wd_rl_id"], extended_id=False,
+                                  data=cfg_wd_torque_limit_max_data)
+
+        cfg_wd_velocity_limit_data = [CanWheelDriveMessageIDs.VELOCITY_LIMIT.value, 0, 0, 0, 0, 64, 28, 70]
+        self.network.send_message(arbitration_id=self.ids["cfg_wd_fr_id"], extended_id=False,
+                                  data=cfg_wd_velocity_limit_data)
+        self.network.send_message(arbitration_id=self.ids["cfg_wd_fl_id"], extended_id=False,
+                                  data=cfg_wd_velocity_limit_data)
+        self.network.send_message(arbitration_id=self.ids["cfg_wd_rr_id"], extended_id=False,
+                                  data=cfg_wd_velocity_limit_data)
+        self.network.send_message(arbitration_id=self.ids["cfg_wd_rl_id"], extended_id=False,
+                                  data=cfg_wd_velocity_limit_data)
+
         self.prev_state = self.current_state
         self.current_state = InternalStates.IDLE
         self.flags["idl"] = True
@@ -129,10 +150,10 @@ class StateHandler:
                                       data=cmd_wd_mode_drive_data)
             self.network.send_message(arbitration_id=self.ids["cmd_wd_fl_id"], extended_id=False,
                                       data=cmd_wd_mode_drive_data)
-            self.network.send_message(arbitration_id=self.ids["cmd_wd_rr_id"], extended_id=False,
-                                      data=cmd_wd_mode_drive_data)
-            self.network.send_message(arbitration_id=self.ids["cmd_wd_rl_id"], extended_id=False,
-                                      data=cmd_wd_mode_drive_data)
+            # self.network.send_message(arbitration_id=self.ids["cmd_wd_rr_id"], extended_id=False,
+            #                           data=cmd_wd_mode_drive_data)
+            # self.network.send_message(arbitration_id=self.ids["cmd_wd_rl_id"], extended_id=False,
+            #                           data=cmd_wd_mode_drive_data)
 
             cmd_wd_state_stopped_data = [CanWheelDriveMessageIDs.DRIVE_STATE.value, 0,
                                          CanWheelDriveMessageIDs.STOPPED.value, 0]
@@ -140,10 +161,10 @@ class StateHandler:
                                       data=cmd_wd_state_stopped_data)
             self.network.send_message(arbitration_id=self.ids["cmd_wd_fl_id"], extended_id=False,
                                       data=cmd_wd_state_stopped_data)
-            self.network.send_message(arbitration_id=self.ids["cmd_wd_rr_id"], extended_id=False,
-                                      data=cmd_wd_state_stopped_data)
-            self.network.send_message(arbitration_id=self.ids["cmd_wd_rl_id"], extended_id=False,
-                                      data=cmd_wd_state_stopped_data)
+            # self.network.send_message(arbitration_id=self.ids["cmd_wd_rr_id"], extended_id=False,
+            #                           data=cmd_wd_state_stopped_data)
+            # self.network.send_message(arbitration_id=self.ids["cmd_wd_rl_id"], extended_id=False,
+            #                           data=cmd_wd_state_stopped_data)
 
             self.reference["velocity"] = [0.0, 0.0, 0.0, 0.0]
             self.reference["current"] = [0.0, 0.0, 0.0, 0.0]
@@ -170,10 +191,10 @@ class StateHandler:
                                       data=cmd_wd_mode_drive_data)
             self.network.send_message(arbitration_id=self.ids["cmd_wd_fl_id"], extended_id=False,
                                       data=cmd_wd_mode_drive_data)
-            self.network.send_message(arbitration_id=self.ids["cmd_wd_rr_id"], extended_id=False,
-                                      data=cmd_wd_mode_drive_data)
-            self.network.send_message(arbitration_id=self.ids["cmd_wd_rl_id"], extended_id=False,
-                                      data=cmd_wd_mode_drive_data)
+            # self.network.send_message(arbitration_id=self.ids["cmd_wd_rr_id"], extended_id=False,
+            #                           data=cmd_wd_mode_drive_data)
+            # self.network.send_message(arbitration_id=self.ids["cmd_wd_rl_id"], extended_id=False,
+            #                           data=cmd_wd_mode_drive_data)
 
             cmd_wd_state_started_data = [CanWheelDriveMessageIDs.DRIVE_STATE.value, 0,
                                          CanWheelDriveMessageIDs.STARTED.value, 0]
@@ -181,10 +202,10 @@ class StateHandler:
                                       data=cmd_wd_state_started_data)
             self.network.send_message(arbitration_id=self.ids["cmd_wd_fl_id"], extended_id=False,
                                       data=cmd_wd_state_started_data)
-            self.network.send_message(arbitration_id=self.ids["cmd_wd_rr_id"], extended_id=False,
-                                      data=cmd_wd_state_started_data)
-            self.network.send_message(arbitration_id=self.ids["cmd_wd_rl_id"], extended_id=False,
-                                      data=cmd_wd_state_started_data)
+            # self.network.send_message(arbitration_id=self.ids["cmd_wd_rr_id"], extended_id=False,
+            #                           data=cmd_wd_state_started_data)
+            # self.network.send_message(arbitration_id=self.ids["cmd_wd_rl_id"], extended_id=False,
+            #                           data=cmd_wd_state_started_data)
 
             self.flags["drv"] = False
 
@@ -194,7 +215,6 @@ class StateHandler:
 
     def handle_err(self):
         self.flags["ref"] = False
-        # TODO: SendWheelReferenceMsg
         cmd_servo_state_idle = [CanServoMessageIDs.MODE.value, CanServoMessageIDs.MODE_IDLE.value]
         self.network.send_message(arbitration_id=self.ids["cmd_servo_id"], extended_id=False,
                                   data=cmd_servo_state_idle)
@@ -304,7 +324,7 @@ class StateHandler:
         while True:
             self.network.sleep(duration_ms=100)
             input_vector = {"steering_angle": self.reference["steering_angle"],
-                            "velocity": 1.0}
+                            "velocity": self.reference["velocity"]}
             rpm = self.controller.control(input_vector=input_vector)
 
             ref_wd_fr_data = self.get_wd_reference_msg(self.reference["current"][0], rpm["FR"])
