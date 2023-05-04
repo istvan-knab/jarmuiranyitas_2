@@ -22,4 +22,3 @@ class UDPReceiver:
             decoded_data = json.loads(encoded_data)
 
             self.last_data.update(decoded_data)
-            sleep(0.1)
