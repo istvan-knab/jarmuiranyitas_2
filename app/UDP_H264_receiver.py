@@ -92,7 +92,7 @@ BUFF_SIZE = 65536
 client_socket = socket.socket(socket.AF_INET6,socket.SOCK_DGRAM)
 client_socket.setsockopt(socket.SOL_SOCKET,socket.SO_RCVBUF,BUFF_SIZE)
 host_name = socket.gethostname()
-host_ip = 'fc94:2785:f398:aa83:638f:aa15:a4fd:8e17'#  socket.gethostbyname(host_name)
+host_ip = 'fc94:776b:33a5:6f6a:337c:2e85:bc5e:da98'#  socket.gethostbyname(host_name)
 print(host_ip)
 port = 9999
 message = b'Hello'
