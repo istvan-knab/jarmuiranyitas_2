@@ -46,4 +46,3 @@ class CAN:
     def set_ref_vals(self, ref_vals):
         while True:
             self.state_handler.set_ref_vals(ref_vals)
-            self.network.sleep(duration_ms=100)
