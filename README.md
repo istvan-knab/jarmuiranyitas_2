@@ -11,7 +11,7 @@
 ![alt text](https://github.com/istvan-knab/jarmuiranyitas_2/blob/main/Old%20Documentation/Pictures/_DSC6410.jpg)
 ## Quick description 📋
 
-This repository is the Documentation of a 1:5 4WD-Car. Descriptions and CAN protocols are declared in the repository of previous projects, which can be accessed by the following link : 
+This repository is the Documentation of a 1:5 4WD-Car. Descriptions of previous projects and CAN protocols are declared in the repository of previous projects, which can be accessed by the following link : 
 
 https://drive.google.com/drive/folders/1CZQcddJfMFzFaR6hJL0l49vW3KqHnq_u
 
