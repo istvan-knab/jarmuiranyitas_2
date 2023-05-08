@@ -44,7 +44,7 @@ class MeasurAngle(Measure):
 
     def read_previous(self):
         self.path = os.getcwd()
-        self.path = self.path + "/results/steering.xlsx"
+        self.path = self.path + "/results/steering.csv"
         self.state = (self.velocity, self.steering_angle)
         self.state_dict = {self.state: self.yaw_rate}
 

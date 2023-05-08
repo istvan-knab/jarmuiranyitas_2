@@ -2,6 +2,7 @@ import can
 import os
 import pandas as pd
 from can import Message
+import csv
 
 from jarmuiranyitas_2.measurement.measure import Measure
 
@@ -35,6 +36,7 @@ class MeasurTorque(Measure):
 
     def read_previous(self):
         self.path = os.getcwd()
-        self.path = self.path + "/results/torque.xlsx"
+        self.path = self.path + "/results/torque.csv"
+
         self.state = (self.velocity, self.steering_angle)
         self.state_dict = {self.state: self.yaw_rate}
