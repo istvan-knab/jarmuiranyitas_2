@@ -1,11 +1,16 @@
 import can
 from can import Message
 import pandas as pd
+import os
 
 from jarmuiranyitas_2.measurement.measure import Measure
 
 class MeasurAngle(Measure):
     def __init__(self):
+        """
+        Three dimensional state, with velocity, steering angle and yaw_rate.
+        The function of this class is to find correlation function relationship between this values.
+        """
         self.velocity = 0
         self.steering_angle = 0
         self.yaw_rate = 0
@@ -25,7 +30,6 @@ class MeasurAngle(Measure):
 
     def imu_measurement(self) -> float:
         yaw_rate = 2
-
         return yaw_rate
 
     def input_signal(self) -> float :
@@ -34,7 +38,9 @@ class MeasurAngle(Measure):
         return velocity, steering
 
     def write_file(self)->None:
-        df = pd.DataFrame.from_dict(self.state_dict)
+        path = os.getcwd()
+        path = path + "/results"
+        df = pd.DataFrame(self.state_dict)
         df.to_csv(index = False)
         print(df)
 
