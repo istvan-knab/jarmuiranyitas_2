@@ -6,7 +6,7 @@ import csv
 
 from jarmuiranyitas_2.measurement.measure import Measure
 
-class MeasurTorque(Measure):
+class MeasureTorque(Measure):
     def __init__(self):
         self.velocity = 0
         self.distribution = 0
@@ -22,7 +22,6 @@ class MeasurTorque(Measure):
 
     def imu_measurement(self) -> float:
         yaw_rate = 0
-
         return yaw_rate
 
     def input_signal(self):

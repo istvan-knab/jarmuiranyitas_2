@@ -19,11 +19,22 @@ class Measure:
         self.state_dict = {self.state : self.yaw_rate}
 
     def update_state_dict(self)->None:
+        """
+        The data will be saved in a 3 dimensional matrix
+        """
         pass
     def imu_measurement(self)->float:
+        """
+        The measured yaw-rate will be used to find the connection by
+        several speed between torque distribution and steering. The desired
+        movement to control is only the yaw-movement.
+        """
         pass
     def input_signal(self):
         pass
     def write_file(self):
+        pass
+
+    def read_previous(self):
         pass
 
