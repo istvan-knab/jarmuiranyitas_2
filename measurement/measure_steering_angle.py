@@ -14,8 +14,7 @@ class MeasurAngle(Measure):
         self.velocity = 0
         self.steering_angle = 0
         self.yaw_rate = 0
-        self.state = (self.velocity, self.steering_angle)
-        self.state_dict = {self.state: self.yaw_rate}
+        self.read_previous()
 
 
     def update_state_dict(self) -> None:
@@ -38,11 +37,16 @@ class MeasurAngle(Measure):
         return velocity, steering
 
     def write_file(self)->None:
-        path = os.getcwd()
-        path = path + "/results"
+
         df = pd.DataFrame(self.state_dict)
         df.to_csv(index = False)
         print(df)
+
+    def read_previous(self):
+        self.path = os.getcwd()
+        self.path = self.path + "/results/steering.xlsx"
+        self.state = (self.velocity, self.steering_angle)
+        self.state_dict = {self.state: self.yaw_rate}
 
 
 m = MeasurAngle()
