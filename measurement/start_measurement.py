@@ -17,9 +17,10 @@ class StartMeasurement:
             counter += 1
             sleep(1 / self.frequency)
             self.measure.update_state_dict()
-            if counter == 100:
+            if counter == 5:
                 self.measure.write_file()
                 counter = 0
 
 
 start= StartMeasurement("distribution", 1200)
+start.active()

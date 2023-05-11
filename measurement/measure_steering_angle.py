@@ -21,7 +21,6 @@ class MeasureAngle(Measure):
         self.write_file()
         self.read_previous()
 
-
     def update_state_dict(self) -> None:
         """
         This function is responsible for updating the measured values
@@ -48,7 +47,7 @@ class MeasureAngle(Measure):
 
     def write_file(self)->None:
 
-        df = pd.DataFrame({'Velocity': self.velocity,
+        df = pd.DataFrame({'Velocity': self.state_dict,
                            "Steering angle": self.steering_angle,
                            "Yaw": self.yaw_rate
                            })
@@ -62,6 +61,7 @@ class MeasureAngle(Measure):
         self.velocity = list(read_data["Velocity"])
         self.steering_angle = list(read_data["Steering angle"])
         self.yaw_rate = list(read_data["Yaw"])
+        self.state = {}
 
         for elements in range(len(self.velocity)):
             self.state[elements] = (self.velocity[elements], self.steering_angle[elements])

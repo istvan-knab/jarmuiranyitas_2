@@ -14,7 +14,7 @@ def main():
     can = CAN()
     udp = UDPReceiver()
     #todo :implement config
-    measure = StartMeasurement()
+    measure = StartMeasurement("steering",100)
 
     can_comm = Thread(target=can.start_communication)
     udp_listener = Thread(target=udp.receive)
