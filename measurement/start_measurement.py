@@ -10,7 +10,9 @@ class StartMeasurement:
         else:
             raise Exception("Invalid measurement mode")
     def active(self):
-        pass
+
+        while True:
+            pass
 
 
 start= StartMeasurement("distribution", 1200)

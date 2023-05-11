@@ -19,12 +19,13 @@ def main():
     can_comm = Thread(target=can.start_communication)
     udp_listener = Thread(target=udp.receive)
     cross_comm = Thread(target=can.set_ref_vals, args=[udp.last_data])
-    imu_start = Thread(target=measure.active(),)
+    imu_start = Thread(target=measure.active())
 
 
     can_comm.start()
     udp_listener.start()
     cross_comm.start()
+    imu_start.start()
 
 
 if __name__ == "__main__":

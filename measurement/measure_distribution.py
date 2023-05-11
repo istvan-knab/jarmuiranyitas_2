@@ -37,5 +37,5 @@ class MeasureTorque(Measure):
         self.path = os.getcwd()
         self.path = self.path + "/results/torque.csv"
 
-        self.state = (self.velocity, self.steering_angle)
+        self.state = (self.velocity, self.distribution)
         self.state_dict = {self.state: self.yaw_rate}

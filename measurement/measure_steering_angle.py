@@ -53,7 +53,7 @@ class MeasureAngle(Measure):
                            "Yaw": self.yaw_rate
                            })
         df.to_csv(self.path)
-        
+
 
     def read_previous(self):
         self.path = os.getcwd()
@@ -68,5 +68,3 @@ class MeasureAngle(Measure):
             self.state_dict = {self.state: self.yaw_rate}
 
 
-m = MeasureAngle()
-m.write_file()
